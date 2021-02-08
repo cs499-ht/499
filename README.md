@@ -3,3 +3,4 @@
 
 * Sajarin Dider
 * Steffen Loh
+* Starasia Wright
