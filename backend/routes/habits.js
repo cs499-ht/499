@@ -24,7 +24,7 @@ router.route("/add").post((req, res) => {
         const newHabit = new Habit({ username, description, dailyCompleted });
         newHabit
           .save()
-          .then(() => res.json("Habit added!"))
+          .then(() => res.json(`${username}'s ${description} habit added!`))
           .catch((err) => res.status(400).json("Error: " + err));
       }
     }
