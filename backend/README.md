@@ -1,4 +1,5 @@
 make sure you're in the backend directory
+
 create .env file in backend directory with `ATLAS_URI=` remember to change put your password in
 
 `yarn install`
@@ -13,9 +14,9 @@ Read All Users - GET http://localhost:5000/users/
 ![all users](./readme_imgs/all_users.png)
 
 
-Add User - POST http://localhost:5000/users/add
+Register User - POST http://localhost:5000/users/register
 * remember to use JSON body
-![add users](./readme_imgs/add_user.png)
+![add users](./readme_imgs/register_user.png)
 
 ### Habit Route
 Read All Habits - GET http://localhost:5000/habits/
