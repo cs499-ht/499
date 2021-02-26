@@ -11,14 +11,14 @@ router.route("/").get((req, res) => {
 
 //second route 'localhost:5000/habits/add'
 router.route("/add").post((req, res) => {
-  const Username = req.body.username;
-  const Description = req.body.Description;
-  //const DailyCompleted = req.body.DailyCompleted;
+  const username = req.body.username;
+  const description = req.body.description;
+  const dailyCompleted = req.body.dailyCompleted;
   //const TotalCount = req.Body.TotalCount;
 
-  const NewHabit = new Habit({ Username, Description });
+  const newHabit = new Habit({ username, description, dailyCompleted });
 
-  NewHabit.save()
+  newHabit.save()
     .then(() => res.json("Habit added!"))
     .catch((err) => res.status(400).json("Error: " + err));
 });

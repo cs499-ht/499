@@ -4,14 +4,18 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
   {
-    Username: {
+    username: {
       type: String,
       required: true,
       unique: true,
       trim: true, //trims whitespace
       minlength: 3,
     },
-    PhoneNumber: { type: String },
+    password: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: { type: String },
     email: { type: String },
   },
   {

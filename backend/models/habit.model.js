@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 
 const HabitSchema = new Schema(
   {
-    Username: { type: String, required: true },
-    Description: { type: String, required: true },
-    //DailyCompleted: { type: Boolean, required: true },
-    //TotalCount: { type: Double, require: true },
+    username: { type: String, required: true },
+    description: { type: String, required: true },
+    dailyCompleted: { type: Boolean, required: true },
+    // totalCount: { type: Double, require: true },
   },
   {
     timestamps: true,
