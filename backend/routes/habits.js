@@ -55,12 +55,14 @@ router.route("/update/:id").post((req, res) => {
     .then((habit) => {
       habit.username = req.body.username;
       habit.Description = req.body.Description;
-      // habit.DailyCompleted = req.body.DailyCompleted;
+      habit.dailyCompleted = req.body.dailyCompleted;
       // habit.TotalCount = req.body.TotalCount;
 
       habit
         .save()
-        .then(() => res.json("Habit updated!"))
+        // .then(() => res.json("Habit updated!"))
+        // convert mongoose document into JSON
+        .then(() => res.end(JSON.stringify(habit)))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));

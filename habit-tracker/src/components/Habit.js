@@ -1,8 +1,11 @@
 import { FcCancel } from "react-icons/fc";
 
-const Habit = ({ habit, onDelete }) => {
+const Habit = ({ habit, onDelete, onToggle }) => {
   return (
-    <div className="habit">
+    <div
+      className={`habit${habit.dailyCompleted ? "-completed" : ""}`}
+      onDoubleClick={() => onToggle(habit._id)}
+    >
       <h2>{habit.username}</h2>
       <h3>
         {habit.description}
