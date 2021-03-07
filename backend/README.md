@@ -43,11 +43,15 @@ Read All Habits - GET http://localhost:5000/habits/
 
 ![all habits](./readme_images/all_habits.png)
 
-Read Single Habit - GET http://localhost:5000/habits/{id} 60380bbdb80b6f1fa27c414a
+Add Habit - GET http://localhost:5000/habits/add
+
+![add habit](./readme_images/add_habit.png)
+
+Read Single Habit - GET http://localhost:5000/habits/{id}
 
 ![find habit](./readme_images/find_habit.png)
 
-Update Single Habit - POST http://localhost:5000/habits/update/{id} 60380c49c8cf0b2080a746d4
+Update Single Habit - POST http://localhost:5000/habits/update/{id}
 
 - remember to use JSON body
 
