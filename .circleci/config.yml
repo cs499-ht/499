@@ -1,9 +1,9 @@
 version: 2.1
 jobs:
   test:
+    working_directory: ~/project/habit-tracker
     docker:
       - image: circleci/node:8
-    working_directory: ~/499/habit-tracker
     steps:
       - checkout
       - restore_cache:
