@@ -3,17 +3,13 @@ jobs:
   test:
     working_directory: ~/project
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10
     steps:
       - checkout
       - run:
           working_directory: ~/project/habit-tracker
           name: Install Dependencies
           command: npm ci
-      - run:
-          working_directory: ~/project/habit-tracker
-          name: Lint Checks
-          command: npm run lint
       - run:
           working_directory: ~/project/habit-tracker
           name: Run Tests
