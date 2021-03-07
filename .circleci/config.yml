@@ -5,6 +5,7 @@ jobs:
       - image: circleci/node:8
     steps:
       - checkout
+      - run: cd habit-tracker
       - restore_cache:
           key: npm-cache-v1-{{ checksum "package-lock.json" }}
       - run:
