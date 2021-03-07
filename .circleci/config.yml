@@ -1,11 +1,13 @@
 version: 2.1
 jobs:
   test:
+    working_directory: ~/project
     docker:
       - image: circleci/node:8
     steps:
       - checkout
       - run: cd habit-tracker
+      - run: pwd
       - restore_cache:
           key: npm-cache-v1-{{ checksum "package-lock.json" }}
       - run:
