@@ -12,10 +12,7 @@ router.route("/").get((req, res) => {
 // Register user
 // http://localhost:5000/users/register
 router.route("/register").post((req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  const phoneNumber = req.body.phoneNumber;
-  const email = req.body.email;
+  const { username, password, phoneNumber, email } = req.body;
 
   //check if username already exists
   User.findOne({ username: username }).then((user) => {
