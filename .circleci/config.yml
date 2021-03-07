@@ -1,0 +1,22 @@
+version: 2.1
+jobs:
+  test:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/habit-tracker
+          name: Install Dependencies
+          command: npm ci
+      - run:
+          working_directory: ~/project/habit-tracker
+          name: Run Tests
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+          command: npm run test
+workflows:
+  test_app:
+    jobs:
+      - test

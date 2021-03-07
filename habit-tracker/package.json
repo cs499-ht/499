@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.3",
+    "enzyme": "^3.11.0",
+    "eslint": "^7.21.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",
@@ -15,7 +16,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .js --ext .jsx"
   },
   "eslintConfig": {
     "extends": [
@@ -23,6 +25,9 @@
       "react-app/jest"
     ]
   },
+  "eslintIgnore": [
+    "node_modules"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
@@ -36,11 +41,21 @@
     ]
   },
   "devDependencies": {
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1"
+    "@testing-library/jest-dom": "^5.11.9",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
+    "enzyme-to-json": "^3.6.1",
+    "lint": "^0.7.0"
   },
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"],
-    "collectCoverageFrom": ["src/**/*.js", "!src/index.js"],
-    "coverageReporters": ["text"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ],
+    "coverageReporters": [
+      "text"
+    ]
   }
 }
