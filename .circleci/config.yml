@@ -12,10 +12,6 @@ jobs:
           command: npm ci
       - run:
           working_directory: ~/project/habit-tracker
-          name: Lint Checks
-          command: npm run lint
-      - run:
-          working_directory: ~/project/habit-tracker
           name: Run Tests
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
