@@ -46,7 +46,7 @@ function App() {
     });
 
     const data = await res.json();
-    console.log(data);
+    console.log("addHabit JSON Response", data);
     // this isn't refreshing properly
     // need to reload page for habit to show up properly
     // something to do with promise?
@@ -78,9 +78,9 @@ function App() {
     });
 
     const data = await res.json();
-    // console.log("JSON RESPONSE", data);
+    console.log("toggleCompleted JSON RESPONSE", data);
 
-    //update UI
+    //update UI with data from server
     setHabits(
       habits.map((habit) =>
         habit._id === id
