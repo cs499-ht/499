@@ -1,23 +1,77 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import Habits from "./components/Habits";
+import AddHabit from "./components/AddHabit";
+import { useState, useEffect } from "react";
 
 function App() {
+  // state info only flows downward into components
+  const [showAddHabit, setshowAddHabit] = useState(false);
+  const [habits, setHabits] = useState([]);
+
+  useEffect(() => {
+    // calls fetchHabits which returns a promise
+    console.log("useEffect refreshed");
+    const getHabits = async () => {
+      const habitsFromServer = await fetchHabits();
+      setHabits(habitsFromServer);
+    };
+
+    getHabits();
+  }, []);
+
+  // fetch habits
+  // can't use async w/ useEffect, need to create async
+  const fetchHabits = async () => {
+    const res = await fetch("http://localhost:5000/habits");
+    const data = await res.json();
+    return data;
+  };
+
+  // add habit
+  const addHabit = async (habit) => {
+    // const newHabit = { id, ...habit };
+    // setHabits([...habits, newHabit]);
+
+    const res = await fetch("http://localhost:5000/habits/add", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(habit),
+    });
+
+    const data = await res.json();
+    console.log(data);
+    // this isn't refreshing properly
+    // need to reload page for habit to show up properly
+    // something to do with promise?
+    setHabits([...habits, data]);
+  };
+
+  //delete habit
+  const deleteHabit = async (id) => {
+    await fetch(`http://localhost:5000/habits/${id}`, { method: "DELETE" });
+
+    //filter deleted habit from UI
+    setHabits(habits.filter((habit) => habit._id !== id));
+  };
+
+  /* onClick (Habit.js) calls onDelete (App.js) function 
+      State gets passed down
+      Actions get passed up*/
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header
+        onAdd={() => setshowAddHabit(!showAddHabit)}
+        showAdd={showAddHabit}
+      />
+      {/* && - shortcut for ternary w/o else block */}
+      {showAddHabit && <AddHabit onAdd={addHabit} />}
+      {habits.length > 0 ? (
+        <Habits habits={habits} onDelete={deleteHabit} />
+      ) : (
+        "Add a habit!"
+      )}
     </div>
   );
 }
