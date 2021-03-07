@@ -1,6 +1,7 @@
 version: 2.1
 jobs:
   test:
+    working_directory: ~/habit-tracker
     docker:
       - image: circleci/node:8
     steps:
