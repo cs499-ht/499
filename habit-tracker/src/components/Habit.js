@@ -1,4 +1,5 @@
 import { FcCancel } from "react-icons/fc";
+import PropTypes from "prop-types";
 
 const Habit = ({ habit, onDelete, onToggle }) => {
   return (
@@ -20,6 +21,14 @@ const Habit = ({ habit, onDelete, onToggle }) => {
       </h3>
     </div>
   );
+};
+
+Habit.propTypes = {
+  habit: PropTypes.shape({
+    _id: PropTypes.string,
+    username: PropTypes.string,
+    description: PropTypes.string,
+  }),
 };
 
 export default Habit;
