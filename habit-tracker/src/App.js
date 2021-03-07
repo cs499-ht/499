@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import Habits from "./components/Habits";
 import AddHabit from "./components/AddHabit";
 import { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
   // state info only flows downward into components
@@ -27,11 +28,15 @@ function App() {
     return data;
   };
 
+  // fetch habit
+  const fetchHabit = async (id) => {
+    const res = await fetch(`http://localhost:5000/habits/${id}`);
+    const data = await res.json();
+    return data;
+  };
+
   // add habit
   const addHabit = async (habit) => {
-    // const newHabit = { id, ...habit };
-    // setHabits([...habits, newHabit]);
-
     const res = await fetch("http://localhost:5000/habits/add", {
       method: "POST",
       headers: {
@@ -56,6 +61,35 @@ function App() {
     setHabits(habits.filter((habit) => habit._id !== id));
   };
 
+  //toggle completed
+  const toggleCompleted = async (id) => {
+    const habitToToggle = await fetchHabit(id);
+    const updatedHabit = {
+      ...habitToToggle,
+      dailyCompleted: !habitToToggle.dailyCompleted,
+    };
+
+    const res = await fetch(`http://localhost:5000/habits/update/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(updatedHabit),
+    });
+
+    const data = await res.json();
+    // console.log("JSON RESPONSE", data);
+
+    //update UI
+    setHabits(
+      habits.map((habit) =>
+        habit._id === id
+          ? { ...habit, dailyCompleted: data.dailyCompleted }
+          : habit
+      )
+    );
+  };
+
   /* onClick (Habit.js) calls onDelete (App.js) function 
       State gets passed down
       Actions get passed up*/
@@ -68,7 +102,11 @@ function App() {
       {/* && - shortcut for ternary w/o else block */}
       {showAddHabit && <AddHabit onAdd={addHabit} />}
       {habits.length > 0 ? (
-        <Habits habits={habits} onDelete={deleteHabit} />
+        <Habits
+          habits={habits}
+          onDelete={deleteHabit}
+          onToggle={toggleCompleted}
+        />
       ) : (
         "Add a habit!"
       )}
