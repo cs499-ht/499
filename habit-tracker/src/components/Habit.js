@@ -7,9 +7,9 @@ const Habit = ({ habit, onDelete, onToggle }) => {
       className={`habit${habit.dailyCompleted ? "-completed" : ""}`}
       onDoubleClick={() => onToggle(habit._id)}
     >
-      <h2>{habit.username}</h2>
+      <h2>Username: {habit.username}</h2>
       <h3>
-        {habit.description}
+        Habit: {habit.description}
         {/* onClick calls onDelete function from App.js 
             State gets passed down
             Actions get passed up*/}
