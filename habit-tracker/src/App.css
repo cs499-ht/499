@@ -32,7 +32,6 @@
   color: green;
   border-style: solid;
   border-width: medium;
-  cursor: pointer;
   margin-top: 10px;
 }
 
@@ -40,7 +39,6 @@
   /* color: red; */
   border-style: solid;
   border-width: medium;
-  cursor: pointer;
   margin-top: 10px;
 }
 

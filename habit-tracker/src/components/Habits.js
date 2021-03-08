@@ -1,14 +1,14 @@
 import Habit from "./Habit";
 
-const Habits = ({ habits, onDelete, onToggle }) => {
+const Habits = ({ habits, onDelete, toggleComplete }) => {
   return (
     <>
       {habits.map((habit) => (
         <Habit
-          key={habit._id}
           habit={habit}
+          key={habit._id}
           onDelete={onDelete}
-          onToggle={onToggle}
+          toggleComplete={toggleComplete}
         />
       ))}
     </>

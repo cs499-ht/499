@@ -106,7 +106,7 @@ function App() {
         <Habits
           habits={habits}
           onDelete={deleteHabit}
-          onToggle={toggleCompleted}
+          toggleComplete={toggleCompleted}
         />
       ) : (
         "Add a habit above!"
