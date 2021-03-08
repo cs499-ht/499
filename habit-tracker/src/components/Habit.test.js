@@ -1,8 +1,5 @@
-import { configure, shallow } from "enzyme";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import { shallow } from "enzyme";
 import Habit from "./Habit";
-
-configure({ adapter: new Adapter() });
 
 describe("Habit component testing", () => {
   const habit = {
