@@ -28,6 +28,7 @@ Habit.propTypes = {
     _id: PropTypes.string,
     username: PropTypes.string,
     description: PropTypes.string,
+    dailyCompleted: PropTypes.bool,
   }),
 };
 

@@ -11,7 +11,6 @@ function App() {
 
   useEffect(() => {
     // calls fetchHabits which returns a promise
-    console.log("useEffect refreshed");
     const getHabits = async () => {
       const habitsFromServer = await fetchHabits();
       setHabits(habitsFromServer);
@@ -108,7 +107,7 @@ function App() {
           onToggle={toggleCompleted}
         />
       ) : (
-        "Add a habit!"
+        "Add a habit above!"
       )}
     </div>
   );

@@ -22,7 +22,7 @@ const AddHabit = ({ onAdd }) => {
   };
 
   return (
-    <form className="add-form" onSubmit={onSubmit}>
+    <form className="add-habit-form" onSubmit={onSubmit}>
       <div className="form-control">
         <label>Username</label>
         <input
