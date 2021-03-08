@@ -24,7 +24,9 @@ router.route("/add").post((req, res) => {
         const newHabit = new Habit({ username, description, dailyCompleted });
         newHabit
           .save()
-          .then(() => res.json(`${username}'s ${description} habit added!`))
+          // .then(() => res.json(`${username}'s ${description} habit added!`))
+          // convert mongoose document into JSON
+          .then(() => res.end(JSON.stringify(newHabit)))
           .catch((err) => res.status(400).json("Error: " + err));
       }
     }
@@ -53,12 +55,14 @@ router.route("/update/:id").post((req, res) => {
     .then((habit) => {
       habit.username = req.body.username;
       habit.Description = req.body.Description;
-      // habit.DailyCompleted = req.body.DailyCompleted;
+      habit.dailyCompleted = req.body.dailyCompleted;
       // habit.TotalCount = req.body.TotalCount;
 
       habit
         .save()
-        .then(() => res.json("Habit updated!"))
+        // .then(() => res.json("Habit updated!"))
+        // convert mongoose document into JSON
+        .then(() => res.end(JSON.stringify(habit)))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));

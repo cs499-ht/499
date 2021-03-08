@@ -28,6 +28,20 @@
   color: #61dafb;
 }
 
+.habit-completed {
+  color: green;
+  border-style: solid;
+  border-width: medium;
+  margin-top: 10px;
+}
+
+.habit {
+  /* color: red; */
+  border-style: solid;
+  border-width: medium;
+  margin-top: 10px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
