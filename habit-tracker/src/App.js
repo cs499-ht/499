@@ -89,7 +89,7 @@ function App() {
     );
   };
 
-  /* onClick (Habit.js) calls onDelete (App.js) function 
+  /* onClick (Habit.js) calls deleteHabit (App.js) function 
       State gets passed down
       Actions get passed up*/
   return (
@@ -100,6 +100,8 @@ function App() {
       />
       {/* && - shortcut for ternary w/o else block */}
       {showAddHabit && <AddHabit onAdd={addHabit} />}
+
+      {/* Default text is "Add a habit above!" if no habits are found in DB */}
       {habits.length > 0 ? (
         <Habits
           habits={habits}
