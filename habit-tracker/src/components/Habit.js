@@ -45,7 +45,9 @@ Habit.propTypes = {
     username: PropTypes.string,
     description: PropTypes.string,
     dailyCompleted: PropTypes.bool,
-  }),
+  }).isRequired,
+  onDelete: PropTypes.func.isRequired,
+  toggleComplete: PropTypes.func.isRequired,
 };
 
 export default Habit;
