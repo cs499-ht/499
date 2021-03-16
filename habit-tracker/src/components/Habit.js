@@ -7,7 +7,7 @@ const Habit = ({ habit, onDelete, toggleComplete }) => {
       <h2>Username: {habit.username}</h2>
       <h3>Habit: {habit.description}</h3>
 
-      {/* onClick calls onDelete function from App.js 
+      {/* onClick calls deleteHabit function from Habits.js 
             State gets passed down
             Actions get passed up*/}
 

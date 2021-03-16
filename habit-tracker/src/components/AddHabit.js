@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { addHabit } from "../utils/Habits_utils";
 
-const AddHabit = ({ onAdd }) => {
+const AddHabit = () => {
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
   const [dailyCompleted, setdailyCompleted] = useState(false);
+
+  // add another setHabit hook here
 
   // not calling onAdd
   const onSubmit = (e) => {
@@ -14,7 +17,7 @@ const AddHabit = ({ onAdd }) => {
       return;
     }
 
-    onAdd({ username, description, dailyCompleted });
+    addHabit({ username, description, dailyCompleted });
     //reset states
     setUsername("");
     setDescription("");

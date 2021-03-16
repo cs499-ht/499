@@ -1,6 +1,8 @@
 import Habit from "./Habit";
+import Header from "./Header";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { deleteHabit } from "../utils/Habits_utils";
 
 const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
   // state info only flows downward into components
@@ -34,6 +36,7 @@ const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
 
   // add habit
   const addHabit = async (habit) => {
+    // put below in habit utils
     const res = await fetch("http://localhost:5000/habits/add", {
       method: "POST",
       headers: {
@@ -41,21 +44,23 @@ const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
       },
       body: JSON.stringify(habit),
     });
+    // put above in habit utils
 
     const data = await res.json();
     // console.log("addHabit JSON Response", data);
-
-    //update UI with data from server
+    // anything that updates state/causes rerender should be done on component level - util file just for functions
+    // .then(update ui)
+    // update UI with data from server
     setHabits([...habits, data]);
   };
 
-  //delete habit
-  const deleteHabit = async (id) => {
-    await fetch(`http://localhost:5000/habits/${id}`, { method: "DELETE" });
+  // //delete habit
+  // const deleteHabit = async (id) => {
+  //   await fetch(`http://localhost:5000/habits/${id}`, { method: "DELETE" });
 
-    //filter deleted habit from UI
-    setHabits(habits.filter((habit) => habit._id !== id));
-  };
+  //   //filter deleted habit from UI
+  //   setHabits(habits.filter((habit) => habit._id !== id));
+  // };
 
   //toggle completed
   const toggleCompleted = async (id) => {

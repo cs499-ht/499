@@ -5,8 +5,6 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-
-
   /* onClick (Habit.js) calls deleteHabit (App.js) function 
       State gets passed down
       Actions get passed up*/
@@ -21,7 +19,8 @@ function App() {
 
       {/* Default text is "Add a habit above!" if no habits are found in DB */}
       {/* {habits.length > 0 ? ( */}
-      <Habits/>
+      <AddHabit />
+      <Habits />
       {/* // ) : (
       //   "Add a habit above!"
       // )} */}
