@@ -1,7 +1,6 @@
 import Header from "./components/Header";
 import Habits from "./containers/Habits";
 import AddHabit from "./components/AddHabit";
-import { useState, useEffect } from "react";
 import HabitProvider from "./context/HabitContext";
 import "./App.css";
 

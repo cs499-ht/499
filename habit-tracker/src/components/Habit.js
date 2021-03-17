@@ -7,12 +7,12 @@ const Habit = ({ habit }) => {
   const { deleteHabit, toggleComplete } = useContext(HabitContext);
 
   return (
-    <div className={`habit${habit.dailyCompleted ? "-completed" : ""}`}>
+    <div className={`habit${habit.completed ? "-completed" : ""}`}>
       <h2>Username: {habit.username}</h2>
       <h3>Habit: {habit.description}</h3>
 
       {/* Show undo if complete */}
-      {habit.dailyCompleted ? (
+      {habit.completed ? (
         <FcUndo
           className="undo"
           style={{ cursor: "pointer" }}
@@ -44,7 +44,7 @@ const Habit = ({ habit }) => {
 //     _id: PropTypes.string,
 //     username: PropTypes.string,
 //     description: PropTypes.string,
-//     dailyCompleted: PropTypes.bool,
+//     completed: PropTypes.bool,
 //   }).isRequired,
 //   onDelete: PropTypes.func.isRequired,
 //   toggleComplete: PropTypes.func.isRequired,

@@ -4,7 +4,7 @@ import { HabitContext } from "../context/HabitContext";
 const AddHabit = () => {
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
-  const [dailyCompleted, setdailyCompleted] = useState(false);
+  const [completed, setCompleted] = useState(false);
 
   const { saveHabit } = useContext(HabitContext);
 
@@ -15,12 +15,12 @@ const AddHabit = () => {
       alert("Please add a username and description");
       return;
     }
+    saveHabit({ username, description, completed });
 
-    saveHabit({ username, description, dailyCompleted });
     //reset states
     setUsername("");
     setDescription("");
-    setdailyCompleted(false);
+    setCompleted(false);
   };
 
   return (
@@ -48,14 +48,14 @@ const AddHabit = () => {
         />
       </div>
       <div className="form-control">
-        <label>dailyCompleted</label>
+        <label>completed</label>
         <input
           type="checkbox"
-          checked={dailyCompleted}
-          value={dailyCompleted}
+          checked={completed}
+          value={completed}
           // controlled component
           // checkbox target value
-          onChange={(e) => setdailyCompleted(e.currentTarget.checked)}
+          onChange={(e) => setCompleted(e.currentTarget.checked)}
         />
       </div>
 

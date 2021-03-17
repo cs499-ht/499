@@ -12,7 +12,6 @@ const HabitProvider = ({ children }) => {
       const habitsFromServer = await fetchHabits();
       setHabits(habitsFromServer);
     };
-
     getHabits();
   }, []);
 
@@ -29,7 +28,7 @@ const HabitProvider = ({ children }) => {
     const newHabit = {
       username: habit.username,
       description: habit.description,
-      dailyCompleted: habit.dailyCompleted,
+      completed: habit.completed,
     };
 
     const res = await fetch("http://localhost:5000/habits/add", {
@@ -41,7 +40,6 @@ const HabitProvider = ({ children }) => {
     });
 
     const data = await res.json();
-
     setHabits([...habits, data]);
   };
 
@@ -63,7 +61,7 @@ const HabitProvider = ({ children }) => {
     const habitToToggle = await fetchHabit(id);
     const updatedHabit = {
       ...habitToToggle,
-      dailyCompleted: !habitToToggle.dailyCompleted,
+      completed: !habitToToggle.completed,
     };
 
     const res = await fetch(`http://localhost:5000/habits/update/${id}`, {
@@ -81,16 +79,18 @@ const HabitProvider = ({ children }) => {
     setHabits(
       // only update single habit
       habits.map((habit) =>
-        habit._id === id
-          ? { ...habit, dailyCompleted: data.dailyCompleted }
-          : habit
+        habit._id === id ? { ...habit, completed: data.completed } : habit
       )
     );
   };
 
+  const time = () => {
+    console.log("test");
+  };
+
   return (
     <HabitContext.Provider
-      value={{ habits, saveHabit, deleteHabit, toggleComplete }}
+      value={{ habits, saveHabit, deleteHabit, toggleComplete, time }}
     >
       {children}
     </HabitContext.Provider>

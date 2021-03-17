@@ -6,7 +6,7 @@ const HabitSchema = new Schema(
   {
     username: { type: String, required: true },
     description: { type: String, required: true },
-    dailyCompleted: { type: Boolean, required: true },
+    completed: { type: Boolean, required: true },
     // totalCount: { type: Double, required: true },
   },
   {

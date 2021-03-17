@@ -10,7 +10,6 @@ const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
 
   return (
     <div className="habits-container">
-      {/* <AddHabit /> */}
       {habits.map((habit) => (
         <Habit habit={habit} key={habit._id} />
       ))}
@@ -23,7 +22,7 @@ const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
 //     _id: PropTypes.string,
 //     username: PropTypes.string,
 //     description: PropTypes.string,
-//     dailyCompleted: PropTypes.bool,
+//     completed: PropTypes.bool,
 //   }).isRequired,
 //   onDelete: PropTypes.func.isRequired,
 //   toggleComplete: PropTypes.func.isRequired,
