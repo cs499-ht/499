@@ -1,7 +1,8 @@
 import Header from "./components/Header";
-import Habits from "./components/Habits";
+import Habits from "./containers/Habits";
 import AddHabit from "./components/AddHabit";
 import { useState, useEffect } from "react";
+import HabitProvider from "./context/HabitContext";
 import "./App.css";
 
 function App() {
@@ -19,8 +20,11 @@ function App() {
 
       {/* Default text is "Add a habit above!" if no habits are found in DB */}
       {/* {habits.length > 0 ? ( */}
-      <AddHabit />
-      <Habits />
+      {/* <AddHabit /> */}
+      <HabitProvider>
+        <AddHabit />
+        <Habits />
+      </HabitProvider>
       {/* // ) : (
       //   "Add a habit above!"
       // )} */}

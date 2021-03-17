@@ -1,15 +1,15 @@
 import { FcCancel, FcOk, FcUndo } from "react-icons/fc";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { HabitContext } from "../context/HabitContext";
 
-const Habit = ({ habit, onDelete, toggleComplete }) => {
+const Habit = ({ habit }) => {
+  const { deleteHabit, toggleComplete } = useContext(HabitContext);
+
   return (
     <div className={`habit${habit.dailyCompleted ? "-completed" : ""}`}>
       <h2>Username: {habit.username}</h2>
       <h3>Habit: {habit.description}</h3>
-
-      {/* onClick calls deleteHabit function from Habits.js 
-            State gets passed down
-            Actions get passed up*/}
 
       {/* Show undo if complete */}
       {habit.dailyCompleted ? (
@@ -32,22 +32,22 @@ const Habit = ({ habit, onDelete, toggleComplete }) => {
       <FcCancel
         style={{ cursor: "pointer" }}
         //   arrow function needed b/c whole event is passed in by default
-        onClick={() => onDelete(habit._id)}
+        onClick={() => deleteHabit(habit._id)}
         size={50}
       />
     </div>
   );
 };
 
-Habit.propTypes = {
-  habit: PropTypes.shape({
-    _id: PropTypes.string,
-    username: PropTypes.string,
-    description: PropTypes.string,
-    dailyCompleted: PropTypes.bool,
-  }).isRequired,
-  onDelete: PropTypes.func.isRequired,
-  toggleComplete: PropTypes.func.isRequired,
-};
+// Habit.propTypes = {
+//   habit: PropTypes.shape({
+//     _id: PropTypes.string,
+//     username: PropTypes.string,
+//     description: PropTypes.string,
+//     dailyCompleted: PropTypes.bool,
+//   }).isRequired,
+//   onDelete: PropTypes.func.isRequired,
+//   toggleComplete: PropTypes.func.isRequired,
+// };
 
 export default Habit;

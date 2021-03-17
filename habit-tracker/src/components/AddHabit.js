@@ -1,15 +1,14 @@
-import { useState } from "react";
-import { addHabit } from "../utils/Habits_utils";
+import { useState, useContext } from "react";
+import { HabitContext } from "../context/HabitContext";
 
 const AddHabit = () => {
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
   const [dailyCompleted, setdailyCompleted] = useState(false);
 
-  // add another setHabit hook here
+  const { saveHabit } = useContext(HabitContext);
 
-  // not calling onAdd
-  const onSubmit = (e) => {
+  const addNewHabit = (e) => {
     e.preventDefault();
 
     if (!username || !description) {
@@ -17,7 +16,7 @@ const AddHabit = () => {
       return;
     }
 
-    addHabit({ username, description, dailyCompleted });
+    saveHabit({ username, description, dailyCompleted });
     //reset states
     setUsername("");
     setDescription("");
@@ -25,7 +24,7 @@ const AddHabit = () => {
   };
 
   return (
-    <form className="add-habit-form" onSubmit={onSubmit}>
+    <form className="add-habit-form" onSubmit={addNewHabit}>
       <div className="form-control">
         <label>Username</label>
         <input
