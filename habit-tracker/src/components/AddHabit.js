@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./css/AddHabit.css"; 
 
 const AddHabit = ({ onAdd }) => {
   const [username, setUsername] = useState("");
@@ -22,43 +23,48 @@ const AddHabit = ({ onAdd }) => {
   };
 
   return (
-    <form className="add-habit-form" onSubmit={onSubmit}>
-      <div className="form-control">
-        <label>Username</label>
-        <input
-          type="text"
-          placeholder="Add username"
-          value={username}
-          // controlled component
-          // event target value
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div className="form-control">
-        <label>Description</label>
-        <input
-          type="text"
-          placeholder="Add description"
-          value={description}
-          // controlled component
-          // event target value
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-      <div className="form-control">
-        <label>dailyCompleted</label>
-        <input
-          type="checkbox"
-          checked={dailyCompleted}
-          value={dailyCompleted}
-          // controlled component
-          // checkbox target value
-          onChange={(e) => setdailyCompleted(e.currentTarget.checked)}
-        />
-      </div>
+    <div className="container">
+      <form className="add-habit-form" onSubmit={onSubmit}>
+        <div className="form-control">
+          <label className="add-habit-label">Username</label>
+          <input
+            className="add-habit-input"
+            type="text"
+            placeholder="Add username"
+            value={username}
+            // controlled component
+            // event target value
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="form-control">
+          <label className="add-habit-label">Description</label>
+          <input
+            className="add-habit-input"
+            type="text"
+            placeholder="Add description"
+            value={description}
+            // controlled component
+            // event target value
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+        <div className="form-control">
+          <label className="add-habit-label">dailyCompleted</label>
+          <input
+            className="add-habit-input"
+            type="checkbox"
+            checked={dailyCompleted}
+            value={dailyCompleted}
+            // controlled component
+            // checkbox target value
+            onChange={(e) => setdailyCompleted(e.currentTarget.checked)}
+          />
+        </div>
 
-      <input type="submit" value="Save Habit" />
-    </form>
+        <input className="submit submit-ripple" type="submit" value="Save Habit" />
+      </form>
+    </div>
   );
 };
 
