@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
+import "./css/Button.css"; 
 
 const Button = ({ text, onClick }) => {
-  return <button onClick={onClick}>{text}</button>;
+  return <button class="ripple" onClick={onClick}>{text}</button>;
 };
 
 Button.propTypes = {
