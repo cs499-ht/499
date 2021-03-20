@@ -10,6 +10,7 @@ const Habit = ({ habit }) => {
     <div className={`habit${habit.completed ? "-completed" : ""}`}>
       <h2>Username: {habit.username}</h2>
       <h3>Habit: {habit.description}</h3>
+      <h3>Total Count: {`${habit.totalCount ? habit.totalCount : "0"}`}</h3>
 
       {/* Show undo if complete */}
       {habit.completed ? (
