@@ -25,12 +25,7 @@ const HabitProvider = ({ children }) => {
 
   // save habit
   const saveHabit = async (habit) => {
-    const newHabit = {
-      username: habit.username,
-      description: habit.description,
-      completed: habit.completed,
-    };
-
+    console.log(habit);
     const res = await fetch("http://localhost:5000/habits/add", {
       method: "POST",
       headers: {
@@ -38,7 +33,6 @@ const HabitProvider = ({ children }) => {
       },
       body: JSON.stringify(habit),
     });
-
     const data = await res.json();
     setHabits([...habits, data]);
   };
@@ -84,13 +78,9 @@ const HabitProvider = ({ children }) => {
     );
   };
 
-  const time = () => {
-    console.log("test");
-  };
-
   return (
     <HabitContext.Provider
-      value={{ habits, saveHabit, deleteHabit, toggleComplete, time }}
+      value={{ habits, saveHabit, deleteHabit, toggleComplete }}
     >
       {children}
     </HabitContext.Provider>
