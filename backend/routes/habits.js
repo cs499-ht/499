@@ -13,7 +13,7 @@ router.route("/add").post((req, res) => {
   const username = req.body.username;
   const description = req.body.description;
   const completed = req.body.completed;
-  //const TotalCount = req.Body.TotalCount;
+  const totalCount = req.body.totalCount;
 
   // check if duplicate habit
   Habit.findOne({ username: username, description: description }).then(
@@ -21,7 +21,12 @@ router.route("/add").post((req, res) => {
       if (habit) {
         return res.status(400).json("Error: User already has this habit!");
       } else {
-        const newHabit = new Habit({ username, description, completed });
+        const newHabit = new Habit({
+          username,
+          description,
+          completed,
+          totalCount,
+        });
         newHabit
           .save()
           // .then(() => res.json(`${username}'s ${description} habit added!`))
@@ -56,7 +61,7 @@ router.route("/update/:id").post((req, res) => {
       habit.username = req.body.username;
       habit.Description = req.body.Description;
       habit.completed = req.body.completed;
-      // habit.TotalCount = req.body.TotalCount;
+      habit.totalCount = req.body.totalCount;
 
       habit
         .save()
