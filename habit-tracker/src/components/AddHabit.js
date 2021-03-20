@@ -5,6 +5,7 @@ const AddHabit = () => {
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
   const [completed, setCompleted] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
 
   const { saveHabit } = useContext(HabitContext);
 
@@ -15,12 +16,19 @@ const AddHabit = () => {
       alert("Please add a username and description");
       return;
     }
-    saveHabit({ username, description, completed });
+
+    if (!totalCount) {
+      alert("Please enter a number for total count");
+      return;
+    }
+
+    saveHabit({ username, description, completed, totalCount });
 
     //reset states
     setUsername("");
     setDescription("");
     setCompleted(false);
+    setTotalCount(0);
   };
 
   return (
@@ -48,6 +56,23 @@ const AddHabit = () => {
         />
       </div>
       <div className="form-control">
+        <label>Total Count</label>
+        <input
+          type="text"
+          placeholder="Total count"
+          value={totalCount}
+          // controlled component
+          // event target value
+          onChange={(e) => {
+            // console.log(typeof e.target.value);
+            setTotalCount(Number(e.target.value));
+            // console.log(totalCount);
+            // console.log(typeof totalCount);
+          }}
+        />
+      </div>
+      <input type="submit" value="Save Habit" />
+      <div className="form-control">
         <label>completed</label>
         <input
           type="checkbox"
@@ -58,8 +83,6 @@ const AddHabit = () => {
           onChange={(e) => setCompleted(e.currentTarget.checked)}
         />
       </div>
-
-      <input type="submit" value="Save Habit" />
     </form>
   );
 };
