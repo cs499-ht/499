@@ -4,6 +4,7 @@ export const HabitContext = createContext();
 
 const HabitProvider = ({ children }) => {
   const [habits, setHabits] = useState([]);
+  const [sortedHabits, setSortedHabits] = useState([]);
 
   // load initial state from backend
   useEffect(() => {
@@ -11,6 +12,7 @@ const HabitProvider = ({ children }) => {
     const getHabits = async () => {
       const habitsFromServer = await fetchHabits();
       setHabits(habitsFromServer);
+      setSortedHabits(habitsFromServer);
     };
     getHabits();
   }, []);
