@@ -28,15 +28,29 @@
   color: #61dafb;
 }
 
-.habit-completed {
+.all-habits-habit-completed {
   color: green;
   border-style: solid;
   border-width: medium;
   margin-top: 10px;
 }
 
-.habit {
+.all-habits-habit {
   /* color: red; */
+  border-style: solid;
+  border-width: medium;
+  margin-top: 10px;
+}
+
+[class^="leaderboard-habit"] {
+  /* color: red; */
+  border-style: solid;
+  border-width: medium;
+  margin-top: 10px;
+}
+
+[class^="leaderboard-habit"][class$="1"] {
+  color: red;
   border-style: solid;
   border-width: medium;
   margin-top: 10px;
