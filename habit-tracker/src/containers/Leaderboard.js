@@ -12,12 +12,18 @@ const Leaderboard = (/*{ habits, onDelete, toggleComplete }*/) => {
   sortedHabits.sort((a, b) => (a.totalCount < b.totalCount ? 1 : -1));
 
   const lead = true;
+  const container = "leaderboard";
 
   return (
-    <div className="leaderboard-container">
+    <div className={`${container}-container`}>
       <h1>Leaderboard</h1>
       {sortedHabits.map((habit) => (
-        <Habit habit={habit} key={habit._id} lead={lead} />
+        <Habit
+          habit={habit}
+          key={`${container}-${habit._id}`}
+          lead={lead}
+          container={container}
+        />
       ))}
     </div>
   );

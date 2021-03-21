@@ -8,11 +8,17 @@ const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
   const [showAddHabit, setshowAddHabit] = useState(false);
   const { habits } = useContext(HabitContext);
 
+  const container = "all-habits";
+
   return (
-    <div className="habits-container">
+    <div className={`${container}-container`}>
       <h1>All Habits</h1>
       {habits.map((habit) => (
-        <Habit habit={habit} key={habit._id} />
+        <Habit
+          habit={habit}
+          key={`${container}-${habit._id}`}
+          container={container}
+        />
       ))}
     </div>
   );
