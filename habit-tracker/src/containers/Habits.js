@@ -10,6 +10,7 @@ const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
 
   return (
     <div className="habits-container">
+      <h1>All Habits</h1>
       {habits.map((habit) => (
         <Habit habit={habit} key={habit._id} />
       ))}
