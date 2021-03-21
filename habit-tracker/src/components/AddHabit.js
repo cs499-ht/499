@@ -52,7 +52,7 @@ const AddHabit = ({ onAdd }) => {
         <div className="form-control">
           <label className="add-habit-label">dailyCompleted</label>
           <input
-            className="add-habit-input"
+            className="add-habit-checkbox"
             type="checkbox"
             checked={dailyCompleted}
             value={dailyCompleted}

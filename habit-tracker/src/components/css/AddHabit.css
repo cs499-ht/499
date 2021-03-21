@@ -8,7 +8,20 @@
     background-color: #FFA69E;
     border-radius: 7.5%;
 }
+.form-control {
+    width: 100%; 
+    padding-top: 2%;
+    padding-bottom: 4%;
+}
+@media screen and (max-width: 850px) {
+    .add-habit-form {
+        width: 45%; 
+        margin: 0 auto;
+        background-color: #FFA69E;
+        border-radius: 7.5%;
+    }
 
+}
 .add-habit-label {
     display: block; 
     font-size: large;
@@ -21,8 +34,20 @@
     border: 0; 
     outline: none;
     border-radius: 10px;
+    border-bottom: black;
 }
 
+.add-habit-checkbox {
+    width: 25px; 
+    height: 25px; 
+    border: 0; 
+    color:#A9F0D1
+}
+input:checked:after{
+    background-color:green;
+} 
+.add-habit-input:focus {
+}
 .submit {
     width: 10vw; 
     height: 5vh; 
