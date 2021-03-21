@@ -17,10 +17,10 @@ const AddHabit = () => {
       return;
     }
 
-    if (!totalCount) {
-      alert("Please enter a number for total count");
-      return;
-    }
+    // if (!totalCount) {
+    //   alert("Please enter a number for total count");
+    //   return;
+    // }
 
     saveHabit({ username, description, completed, totalCount });
 
