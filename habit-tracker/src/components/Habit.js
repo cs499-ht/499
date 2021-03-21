@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { HabitContext } from "../context/HabitContext";
 
-const Habit = ({ habit }) => {
+const Habit = ({ habit, lead }) => {
   const { deleteHabit, toggleComplete } = useContext(HabitContext);
 
   return (
@@ -12,30 +12,40 @@ const Habit = ({ habit }) => {
       <h3>Habit: {habit.description}</h3>
       <h3>Total Count: {`${habit.totalCount ? habit.totalCount : "0"}`}</h3>
 
-      {/* Show undo if complete */}
-      {habit.completed ? (
-        <FcUndo
-          className="undo"
-          style={{ cursor: "pointer" }}
-          onClick={() => toggleComplete(habit._id)}
-          size={50}
-        />
+      {/* don't show options on leaderboard */}
+      {lead ? null : habit.completed ? (
+        // Show undo if complete
+        <>
+          <FcUndo
+            className="undo"
+            style={{ cursor: "pointer" }}
+            onClick={() => toggleComplete(habit._id)}
+            size={50}
+          />
+          <FcCancel
+            style={{ cursor: "pointer" }}
+            //   arrow function needed b/c whole event is passed in by default
+            onClick={() => deleteHabit(habit._id)}
+            size={50}
+          />
+        </>
       ) : (
         // Show checkmark if not complete
-        <FcOk
-          className="OK"
-          style={{ cursor: "pointer" }}
-          onClick={() => toggleComplete(habit._id)}
-          size={50}
-        />
+        <>
+          <FcOk
+            className="OK"
+            style={{ cursor: "pointer" }}
+            onClick={() => toggleComplete(habit._id)}
+            size={50}
+          />
+          <FcCancel
+            style={{ cursor: "pointer" }}
+            //   arrow function needed b/c whole event is passed in by default
+            onClick={() => deleteHabit(habit._id)}
+            size={50}
+          />
+        </>
       )}
-
-      <FcCancel
-        style={{ cursor: "pointer" }}
-        //   arrow function needed b/c whole event is passed in by default
-        onClick={() => deleteHabit(habit._id)}
-        size={50}
-      />
     </div>
   );
 };

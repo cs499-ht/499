@@ -11,11 +11,13 @@ const Leaderboard = (/*{ habits, onDelete, toggleComplete }*/) => {
   let sortedHabits = JSON.parse(JSON.stringify(habits));
   sortedHabits.sort((a, b) => (a.totalCount < b.totalCount ? 1 : -1));
 
+  const lead = true;
+
   return (
     <div className="leaderboard-container">
       <h1>Leaderboard</h1>
       {sortedHabits.map((habit) => (
-        <Habit habit={habit} key={habit._id} />
+        <Habit habit={habit} key={habit._id} lead={lead} />
       ))}
     </div>
   );
