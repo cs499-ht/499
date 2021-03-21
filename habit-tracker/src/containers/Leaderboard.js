@@ -6,8 +6,9 @@ import { HabitContext } from "../context/HabitContext";
 const Leaderboard = (/*{ habits, onDelete, toggleComplete }*/) => {
   //pull state from Habit Context
   const { habits } = useContext(HabitContext);
-  let sortedHabits = habits;
 
+  //deep copy of habits needed, otherwise entire state changes
+  let sortedHabits = JSON.parse(JSON.stringify(habits));
   sortedHabits.sort((a, b) => (a.totalCount < b.totalCount ? 1 : -1));
 
   return (
