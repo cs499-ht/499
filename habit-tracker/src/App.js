@@ -6,11 +6,14 @@ import "./App.css";
 import Leaderboard from "./containers/Leaderboard";
 
 function App() {
-  /* onClick (Habit.js) calls deleteHabit (App.js) function 
-      State gets passed down
-      Actions get passed up*/
   return (
     <div className="App">
+      <HabitProvider>
+        <AddHabit />
+        <Habits />
+        <Leaderboard />
+      </HabitProvider>
+
       {/* <Header
         onAdd={() => setshowAddHabit(!showAddHabit)}
         showAdd={showAddHabit}
@@ -21,11 +24,6 @@ function App() {
       {/* Default text is "Add a habit above!" if no habits are found in DB */}
       {/* {habits.length > 0 ? ( */}
       {/* <AddHabit /> */}
-      <HabitProvider>
-        <AddHabit />
-        <Habits />
-        <Leaderboard />
-      </HabitProvider>
       {/* // ) : (
       //   "Add a habit above!"
       // )} */}

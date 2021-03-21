@@ -22,6 +22,9 @@ const Habit = ({ habit, lead, container }) => {
             onClick={() => toggleComplete(habit._id)}
             size={50}
           />
+          {/* onClick (Habit.js) calls deleteHabit (HabitContext.js) function 
+            State gets passed down
+            Actions get passed up */}
           <FcCancel
             style={{ cursor: "pointer" }}
             //   arrow function needed b/c whole event is passed in by default
