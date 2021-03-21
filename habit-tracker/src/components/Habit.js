@@ -1,5 +1,5 @@
 import { FcCancel, FcOk, FcUndo } from "react-icons/fc";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { useContext } from "react";
 import { HabitContext } from "../context/HabitContext";
 

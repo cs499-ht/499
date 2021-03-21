@@ -1,4 +1,4 @@
-import Header from "./components/Header";
+// import Header from "./components/Header";
 import Habits from "./containers/Habits";
 import AddHabit from "./components/AddHabit";
 import HabitProvider from "./context/HabitContext";

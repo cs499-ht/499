@@ -1,11 +1,11 @@
 import Habit from "../components/Habit";
-import { useState, useContext } from "react";
-import PropTypes from "prop-types";
+import { useContext } from "react";
+// import PropTypes from "prop-types";
 import { HabitContext } from "../context/HabitContext";
 
 const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
   // state info only flows downward into components
-  const [showAddHabit, setshowAddHabit] = useState(false);
+  // const [showAddHabit, setshowAddHabit] = useState(false);
   const { habits } = useContext(HabitContext);
 
   const container = "all-habits";
