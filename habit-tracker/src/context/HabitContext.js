@@ -58,6 +58,17 @@ const HabitProvider = ({ children }) => {
       completed: !habitToToggle.completed,
     };
 
+    // console.log("selected habit: ", habitToToggle);
+
+    // update total count
+    if (habitToToggle.completed) {
+      updatedHabit.totalCount = habitToToggle.totalCount - 1;
+    } else {
+      updatedHabit.totalCount = habitToToggle.totalCount + 1;
+    }
+
+    // console.log("updated habit: ", updatedHabit);
+
     const res = await fetch(`http://localhost:5000/habits/update/${id}`, {
       method: "POST",
       headers: {
@@ -73,7 +84,9 @@ const HabitProvider = ({ children }) => {
     setHabits(
       // only update single habit
       habits.map((habit) =>
-        habit._id === id ? { ...habit, completed: data.completed } : habit
+        habit._id === id
+          ? { ...habit, completed: data.completed, totalCount: data.totalCount }
+          : habit
       )
     );
   };
