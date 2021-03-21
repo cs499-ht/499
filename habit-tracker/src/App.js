@@ -3,6 +3,7 @@ import Habits from "./containers/Habits";
 import AddHabit from "./components/AddHabit";
 import HabitProvider from "./context/HabitContext";
 import "./App.css";
+import Leaderboard from "./containers/Leaderboard";
 
 function App() {
   /* onClick (Habit.js) calls deleteHabit (App.js) function 
@@ -23,6 +24,7 @@ function App() {
       <HabitProvider>
         <AddHabit />
         <Habits />
+        <Leaderboard />
       </HabitProvider>
       {/* // ) : (
       //   "Add a habit above!"
