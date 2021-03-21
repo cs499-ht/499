@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { HabitContext } from "../context/HabitContext";
 
-const Habit = ({ habit, lead }) => {
+const Habit = ({ habit, lead, container }) => {
   const { deleteHabit, toggleComplete } = useContext(HabitContext);
 
   return (
-    <div className={`habit${habit.completed ? "-completed" : ""}`}>
+    <div className={`${container}-habit${habit.completed ? "-completed" : ""}`}>
       <h2>Username: {habit.username}</h2>
       <h3>Habit: {habit.description}</h3>
       <h3>Total Count: {`${habit.totalCount ? habit.totalCount : "0"}`}</h3>
