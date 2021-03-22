@@ -48,11 +48,11 @@ const AddHabit = () => {
           />
         </div>
         <div className="form-control">
-          <label className="add-habit-label">Description</label>
+          <label className="add-habit-label">Habit</label>
           <input
             className="add-habit-input"
             type="text"
-            placeholder="Add description"
+            placeholder="Add habit description"
             value={description}
             // controlled component
             // event target value
@@ -77,7 +77,7 @@ const AddHabit = () => {
           />
         </div>
         <div className="form-control">
-          <label className="add-habit-label">completed</label>
+          <label className="add-habit-label">Completed</label>
           <input
             className="add-habit-checkbox"
             type="checkbox"

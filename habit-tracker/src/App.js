@@ -10,8 +10,8 @@ function App() {
     <div className="App">
       <HabitProvider>
         <AddHabit />
-        <Habits />
         <Leaderboard />
+        <Habits />
       </HabitProvider>
 
       {/* <Header
