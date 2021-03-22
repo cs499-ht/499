@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { HabitContext } from "../context/HabitContext";
 import "./css/AddHabit.css"; 
 
-const AddHabit = ({ onAdd }) => {
+const AddHabit = () => {
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
-  const [dailyCompleted, setdailyCompleted] = useState(false);
+  const [completed, setCompleted] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
 
-  // not calling onAdd
-  const onSubmit = (e) => {
+  const { saveHabit } = useContext(HabitContext);
+
+  const addNewHabit = (e) => {
     e.preventDefault();
 
     if (!username || !description) {
@@ -15,14 +18,22 @@ const AddHabit = ({ onAdd }) => {
       return;
     }
 
-    onAdd({ username, description, dailyCompleted });
+    // if (!totalCount) {
+    //   alert("Please enter a number for total count");
+    //   return;
+    // }
+
+    saveHabit({ username, description, completed, totalCount });
+
     //reset states
     setUsername("");
     setDescription("");
-    setdailyCompleted(false);
+    setCompleted(false);
+    setTotalCount(0);
   };
 
   return (
+<<<<<<< HEAD
     <div className="container">
       <form className="add-habit-form" onSubmit={onSubmit}>
         <div className="form-control">
@@ -65,6 +76,60 @@ const AddHabit = ({ onAdd }) => {
         <input className="submit submit-ripple" type="submit" value="Save Habit" />
       </form>
     </div>
+=======
+    <form className="add-habit-form" onSubmit={addNewHabit}>
+      <div className="form-control">
+        <label>Username</label>
+        <input
+          type="text"
+          placeholder="Add username"
+          value={username}
+          // controlled component
+          // event target value
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
+      <div className="form-control">
+        <label>Description</label>
+        <input
+          type="text"
+          placeholder="Add description"
+          value={description}
+          // controlled component
+          // event target value
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+      <div className="form-control">
+        <label>Total Count</label>
+        <input
+          type="text"
+          placeholder="Total count"
+          value={totalCount}
+          // controlled component
+          // event target value
+          onChange={(e) => {
+            // console.log(typeof e.target.value);
+            setTotalCount(Number(e.target.value));
+            // console.log(totalCount);
+            // console.log(typeof totalCount);
+          }}
+        />
+      </div>
+      <input type="submit" value="Save Habit" />
+      <div className="form-control">
+        <label>completed</label>
+        <input
+          type="checkbox"
+          checked={completed}
+          value={completed}
+          // controlled component
+          // checkbox target value
+          onChange={(e) => setCompleted(e.currentTarget.checked)}
+        />
+      </div>
+    </form>
+>>>>>>> 773ef5394ba1fdfa5e85e0b599ee5b162ad5e3b1
   );
 };
 
