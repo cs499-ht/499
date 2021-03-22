@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { HabitContext } from "../context/HabitContext";
 
-const AddHabit = ({ onAdd }) => {
+const AddHabit = () => {
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
-  const [dailyCompleted, setdailyCompleted] = useState(false);
+  const [completed, setCompleted] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
 
-  // not calling onAdd
-  const onSubmit = (e) => {
+  const { saveHabit } = useContext(HabitContext);
+
+  const addNewHabit = (e) => {
     e.preventDefault();
 
     if (!username || !description) {
@@ -14,15 +17,22 @@ const AddHabit = ({ onAdd }) => {
       return;
     }
 
-    onAdd({ username, description, dailyCompleted });
+    // if (!totalCount) {
+    //   alert("Please enter a number for total count");
+    //   return;
+    // }
+
+    saveHabit({ username, description, completed, totalCount });
+
     //reset states
     setUsername("");
     setDescription("");
-    setdailyCompleted(false);
+    setCompleted(false);
+    setTotalCount(0);
   };
 
   return (
-    <form className="add-habit-form" onSubmit={onSubmit}>
+    <form className="add-habit-form" onSubmit={addNewHabit}>
       <div className="form-control">
         <label>Username</label>
         <input
@@ -46,18 +56,33 @@ const AddHabit = ({ onAdd }) => {
         />
       </div>
       <div className="form-control">
-        <label>dailyCompleted</label>
+        <label>Total Count</label>
         <input
-          type="checkbox"
-          checked={dailyCompleted}
-          value={dailyCompleted}
+          type="text"
+          placeholder="Total count"
+          value={totalCount}
           // controlled component
-          // checkbox target value
-          onChange={(e) => setdailyCompleted(e.currentTarget.checked)}
+          // event target value
+          onChange={(e) => {
+            // console.log(typeof e.target.value);
+            setTotalCount(Number(e.target.value));
+            // console.log(totalCount);
+            // console.log(typeof totalCount);
+          }}
         />
       </div>
-
       <input type="submit" value="Save Habit" />
+      <div className="form-control">
+        <label>completed</label>
+        <input
+          type="checkbox"
+          checked={completed}
+          value={completed}
+          // controlled component
+          // checkbox target value
+          onChange={(e) => setCompleted(e.currentTarget.checked)}
+        />
+      </div>
     </form>
   );
 };
