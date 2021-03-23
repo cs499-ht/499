@@ -1,0 +1,39 @@
+.ripple {
+    width: 10vw; 
+    height: 5vh; 
+    border:0; 
+    outline: none;
+    border-radius: 30px;
+    background-color: #A9F0D1; 
+    background-position: center;
+    transition: background 0.8s;
+}
+.ripple:hover {
+    background: #A9F0D0 radial-gradient(circle, transparent 1%, #A9F0D1 1%) center/15000%;
+}
+.ripple:active {
+    background-color: white;
+    background-size: 100%;
+    transition: background 0s;
+}
+
+@media screen and (max-width: 768px) {
+    .ripple {
+        width: 30vw; 
+        height: 5vh; 
+        border:0; 
+        outline: none;
+        border-radius: 30px;
+        background-color: #A9F0D1; 
+        background-position: center;
+        transition: background 0.8s;
+    }
+    .ripple:hover {
+        background: #A9F0D0 radial-gradient(circle, transparent 1%, #A9F0D1 1%) center/15000%;
+    }
+    .ripple:active {
+        background-color: white;
+        background-size: 100%;
+        transition: background 0s;
+    }
+}

@@ -1,0 +1,71 @@
+.container {
+    text-align: center;
+    padding: 2%;
+}
+.add-habit-form {
+    width: 30%; 
+    margin: 0 auto;
+    background-color: #FFA69E;
+    border-radius: 7.5%;
+}
+.form-control {
+    width: 100%; 
+    padding-top: 1%;
+    padding-bottom: 2%;
+}
+@media screen and (max-width: 850px) {
+    .add-habit-form {
+        width: 45%; 
+        margin: 0 auto;
+        background-color: #FFA69E;
+        border-radius: 7.5%;
+    }
+
+}
+.add-habit-label {
+    display: block; 
+    font-size: 1.5em;
+    font-weight: bolder; 
+    padding-top: 5%;
+    padding-bottom: 2%;
+}
+.add-habit-input {
+    width: 60%; 
+    height: 5vh; 
+    border: 0; 
+    outline: none;
+    border-radius: 10px;
+    border-bottom: black;
+}
+
+.add-habit-checkbox {
+    width: 25px; 
+    height: 25px; 
+    border: 0; 
+    color:#A9F0D1
+}
+input:checked:after{
+    background-color:green;
+} 
+.submit {
+    width: 10vw; 
+    height: 5vh; 
+    border:0; 
+    outline: none;
+    border-radius: 30px;
+    font-weight: bolder;
+    background-color: #FF7E6B; 
+}
+.submit-ripple{
+    background-position: center;
+    transition: background 0.8s;
+}
+
+.submit-ripple:hover {
+    background: #FF7E6B radial-gradient(circle, transparent 1%, #FF7E6B 1%) center/15000%;
+}
+.submit-ripple:active {
+    background-color: white;
+    background-size: 100%;
+    transition: background 0s;
+}

@@ -1,3 +1,7 @@
+html, body {
+  background-color: #FFF7F8;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  
+}
 .App {
   text-align: center;
 }
@@ -29,45 +33,51 @@
 }
 
 .all-habits-habit-completed {
-  color: green;
-  border-style: solid;
-  border-width: medium;
+  border-radius: 25px;
+  border-style: inset;  
+  border-width: thin;
   margin-top: 10px;
+  background-color: #A1E5AB;
+  color: black;
 }
 
 .all-habits-habit {
   /* color: red; */
-  border-style: solid;
-  border-width: medium;
+  border-radius: 25px;
+  border-style: inset;  
+  border-width: thin;
   margin-top: 10px;
+  background-color: #5AA9E6;
 }
 
 [class^="leaderboard-habit"] {
   /* color: red; */
-  border-style: solid;
-  border-width: medium;
+  border-radius: 25px;
+  border-style: inset;  
+  border-width: thin;
   margin-top: 10px;
+  background-color: #E2E1DF;
 }
 
 [class^="leaderboard-habit"][class$="1"] {
-  color: red;
-  border-style: solid;
-  border-width: medium;
+  border-radius: 25px;
+  border-style: inset;  
+  border-width: thin;
   margin-top: 10px;
+  background-color: #E2E1DF;
 }
 
 .all-habits-container {
-  display: inline-block;
+  display: block;
   width: 50%;
-  vertical-align: top;
+  margin: 0 auto;
 }
 
 .leaderboard-container {
-  display: inline-block;
+  display: block;
   width: 50%;
-  vertical-align: top;
+  margin: 0 auto; 
 }
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
