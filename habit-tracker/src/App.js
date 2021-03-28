@@ -5,6 +5,7 @@ import HabitProvider from "./context/HabitContext";
 import "./App.css";
 import Leaderboard from "./containers/Leaderboard";
 import Landing from './Pages/Landing';
+import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './Pages/Dashboard';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -14,9 +15,15 @@ function App() {
   
   // // Initial state of false indicates we are not logged in when we first visit the page
   const [user, setUser] = useState(null);
+  
   const handleLogin = e => {
     e.preventDefault();
     setUser(true);
+  }
+
+  const handleLogout = e => {
+    e.preventDefault();
+    setUser(false);
   }
   return (  
     <div className="App">
@@ -24,13 +31,9 @@ function App() {
         <Switch>
           {/* '/' Landing page is login/registration */}
             {/* Landing */}
-            <Route exact path='/' render={props => <Landing {...props} user={user} />} />
+            <Route exact path='/' handleLogin={handleLogin} render={props => <Landing {...props} user={user} />} />
           {/* When the user signs in and are authorized, they will be rerouted to My habits and Leaderboard */}
-            <Route path='/dashboard' component={Dashboard}/>
-            {/* {Habits} filtered by user */}
-            {/* HabitProvider? */}
-            {/* <Route path='/myhabits'/>
-            <Route path='/leaderboard'/> */}
+            {/* <ProtectedRoute exact path='/dashboard' user={user} handleLogout={handleLogout} component={Dashboard}/> */}
         </Switch>
       </Router>
       {/* <HabitProvider>

@@ -1,21 +1,15 @@
 import React from 'react';
 import Navbar from "../components/Navbar/Navbar";
-import Habits from "../containers/Habits";
-import AddHabit from "../components/AddHabit";
-import HabitProvider from "../context/HabitContext";
-import Leaderboard from "../containers/Leaderboard";
+import { Button, Input } from '@material-ui/core';
+import { auth } from "../firebase";
 
 const Dashboard = () => {
     return(
         <div>
             <Navbar/>
             <h1>Habits Stuff</h1>
-            {/* <HabitProvider>
-                <AddHabit />
-                <Leaderboard />
-                <Habits />
-            </HabitProvider> */}
-            <button>Log Out</button>
+            <Button type="submit" onClick={() => auth.signOut()}>Logout</Button>
+            <button onClick={this.props.handleLogout}>Log Out</button>
         </div>
     )
 };

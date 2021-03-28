@@ -4,7 +4,10 @@ import { Button, Input } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { auth } from "../firebase";
 import { makeStyles } from '@material-ui/core/styles';
+import { Route, Redirect } from 'react-router-dom';
+import Dashboard from './Dashboard';
 
+// required for Modal styling
 function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -89,9 +92,7 @@ const Landing = props => {
     return (
         <div>
             <h1>Welcome to Habit Tracker!</h1>
-            {/* Link to Habits */}
-            <p><Link to='/dashboard'>View Dashboard</Link></p>
-            
+            {/* Link to Habits */}            
             {/* Sign Up Modal */}
             <Modal 
             open={open} 
@@ -148,7 +149,11 @@ const Landing = props => {
             {
             user ? 
             (
-                <Button type="submit" onClick={() => auth.signOut()}>Logout</Button>
+                <div>
+                    {/* <ProtectedRoute/> */}
+                    <Redirect to='/dashboard' component={Dashboard}></Redirect>
+                    <Button type="submit" onClick={() => auth.signOut()}>Logout</Button>
+                </div>
             ) : ( 
                 <div>
                     <Button type="submit" onClick={() => setOpenSignIn(true)}>Sign In</Button>
