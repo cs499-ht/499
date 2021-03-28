@@ -4,15 +4,30 @@ import AddHabit from "./components/AddHabit";
 import HabitProvider from "./context/HabitContext";
 import "./App.css";
 import Leaderboard from "./containers/Leaderboard";
-
+import Landing from './Pages/Landing';
+import Dashboard from './Pages/Dashboard';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 function App() {
-  return (
+  return (  
     <div className="App">
-      <HabitProvider>
+      <Router>
+        <Switch>
+          {/* '/' Landing page is login/registration, Needing landing page */}
+            {/* Main/Landing */}
+            <Route path='/' exact component={Landing}/>
+          {/* When the user signs in and are authorized, they will be rerouted to My habits and Leaderboard */}
+            <Route path='/dashboard' component={Dashboard}/>
+            {/* {Habits} filtered by user */}
+            {/* HabitProvider? */}
+            {/* <Route path='/myhabits'/>
+            <Route path='/leaderboard'/> */}
+        </Switch>
+      </Router>
+      {/* <HabitProvider>
         <AddHabit />
         <Leaderboard />
         <Habits />
-      </HabitProvider>
+      </HabitProvider> */}
 
       {/* <Header
         onAdd={() => setshowAddHabit(!showAddHabit)}
