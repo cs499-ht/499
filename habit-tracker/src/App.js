@@ -32,6 +32,7 @@ function App() {
           {/* '/' Landing page is login/registration */}
             {/* Landing */}
             <Route exact path='/' handleLogin={handleLogin} render={props => <Landing {...props} user={user} />} />
+            <Route exact path='/dashboard' component={Dashboard} />
           {/* When the user signs in and are authorized, they will be rerouted to My habits and Leaderboard */}
             {/* <ProtectedRoute exact path='/dashboard' user={user} handleLogout={handleLogout} component={Dashboard}/> */}
         </Switch>

@@ -13,5 +13,7 @@ const firebaseApp = firebase.initializeApp({
 const db = firebaseApp.firestore();
 const auth = firebase.auth();
 const storage = firebase.storage();
+// As httpOnly cookies are to be used, do not persist any state client side.
+// const persistance = firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
 export { db, auth, storage };
