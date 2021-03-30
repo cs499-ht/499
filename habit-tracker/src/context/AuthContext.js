@@ -10,7 +10,6 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
-  const [username, setUsername] = useState();
   const [loading, setLoading] = useState(true);
 
   function signup(email, password) {
@@ -25,8 +24,28 @@ export const AuthProvider = ({ children }) => {
     return auth.signInWithEmailAndPassword(email, password);
   }
 
+  // TODO REFRESHING localhost:3000 STILL SHOWS USER
+  // THIS ISN'T CLEARING OUT INDEXED DB LOCAL STORAGE
+  // MODIFY AUTH STATE PERSISTANCE
+  // need to change firebase.auth().setPersistance to session
   function logout() {
+    // console.log("logging out");
+    // console.log(user);
+    // setUser({});
     return auth.signOut;
+  }
+
+  function updateEmail(email) {
+    return user.updateEmail(email);
+  }
+
+  function updatePassword(password) {
+    return user.updatePassword(password);
+  }
+
+  // can't set display name when creating an account for the first time, have to update after user is authorized
+  function updateDisplayName(displayName) {
+    return user.updateProfile({ displayName: displayName });
   }
 
   useEffect(() => {
@@ -50,6 +69,9 @@ export const AuthProvider = ({ children }) => {
     login,
     signup,
     logout,
+    updateEmail,
+    updatePassword,
+    updateDisplayName,
   };
 
   return (
