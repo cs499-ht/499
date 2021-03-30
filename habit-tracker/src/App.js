@@ -10,33 +10,36 @@ import Dashboard from './Pages/Dashboard';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { auth } from "./firebase";
+import { AuthProvider } from "./context";
 
 function App() {
   
   // // Initial state of false indicates we are not logged in when we first visit the page
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   
-  const handleLogin = e => {
-    e.preventDefault();
-    setUser(true);
-  }
+  // const handleLogin = e => {
+  //   e.preventDefault();
+  //   setUser(true);
+  // }
 
-  const handleLogout = e => {
-    e.preventDefault();
-    setUser(false);
-  }
+  // const handleLogout = e => {
+  //   e.preventDefault();
+  //   setUser(false);
+  // }
   return (  
     <div className="App">
-      <Router>
-        <Switch>
-          {/* '/' Landing page is login/registration */}
-            {/* Landing */}
-            <Route exact path='/' handleLogin={handleLogin} render={props => <Landing {...props} user={user} />} />
-            <Route exact path='/dashboard' component={Dashboard} />
-          {/* When the user signs in and are authorized, they will be rerouted to My habits and Leaderboard */}
-            {/* <ProtectedRoute exact path='/dashboard' user={user} handleLogout={handleLogout} component={Dashboard}/> */}
-        </Switch>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Switch>
+            {/* '/' Landing page is login/registration */}
+              {/* Landing */}
+              <Route exact path='/' exact component={Landing}></Route>
+              {/* <Route exact path='/' handleLogin={handleLogin} render={props => <Landing {...props} user={user} />} /> */}
+              {/* <ProtectedRoute redirectTo='/' exact path='/dashboard' component={Dashboard} /> */}
+            {/* When the user signs in and are authorized, they will be rerouted to My habits and Leaderboard */}
+          </Switch>
+        </Router>
+      </AuthProvider>
       {/* <HabitProvider>
         <AddHabit />
         <Leaderboard />
