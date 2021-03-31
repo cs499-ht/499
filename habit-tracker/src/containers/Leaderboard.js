@@ -1,11 +1,11 @@
 import Habit from "../components/Habit";
 import { useContext } from "react";
 // import PropTypes from "prop-types";
-import { HabitContext } from "../context/HabitContext";
+import { useHabit } from "../context/HabitContext";
 
 const Leaderboard = (/*{ habits, onDelete, toggleComplete }*/) => {
   //pull state from Habit Context
-  const { habits } = useContext(HabitContext);
+  const { habits } = useHabit();
 
   //deep copy of habits needed, otherwise entire state changes
   let sortedHabits = JSON.parse(JSON.stringify(habits));
@@ -28,16 +28,5 @@ const Leaderboard = (/*{ habits, onDelete, toggleComplete }*/) => {
     </div>
   );
 };
-
-// habits.propTypes = {
-//   habit: PropTypes.shape({
-//     _id: PropTypes.string,
-//     username: PropTypes.string,
-//     description: PropTypes.string,
-//     completed: PropTypes.bool,
-//   }).isRequired,
-//   onDelete: PropTypes.func.isRequired,
-//   toggleComplete: PropTypes.func.isRequired,
-// };
 
 export default Leaderboard;
