@@ -30,7 +30,7 @@ export const HabitProvider = ({ children }) => {
 
   // save habit
   const saveHabit = async (habit) => {
-    console.log(JSON.stringify(habit));
+    console.log("saving habit", JSON.stringify(habit));
     const res = await fetch("http://localhost:5000/habits/add", {
       method: "POST",
       headers: {

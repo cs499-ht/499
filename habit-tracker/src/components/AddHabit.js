@@ -29,7 +29,7 @@ const AddHabit = (handleClose) => {
       totalCount: totalCountRef.current.value,
       completed: completedRef.current.checked,
     };
-    console.log(habit);
+    // console.log(habit);
 
     saveHabit(habit);
 

@@ -26,8 +26,8 @@ const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
     []
   );
 
-  console.log(filtered);
-  console.log(habits);
+  console.log("personal habits", filtered);
+  console.log("all habits", habits);
 
   return (
     <div className={`${container}-container`}>
