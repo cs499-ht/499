@@ -31,7 +31,7 @@ function App() {
                   {/* Landing */}
 
                   {/* change / path to login */}
-                  <PrivateRoute exact path="/" exact component={Dashboard} />
+                  <PrivateRoute exact path="/" component={Dashboard} />
                   <PrivateRoute
                     path="/update-profile"
                     exact
