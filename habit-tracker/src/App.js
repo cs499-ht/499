@@ -25,28 +25,29 @@ function App() {
           <HabitProvider>
             <AuthProvider>
               <Navbar className="width-full max-width-full" />
-              <div className="w-100" style={{ maxWidth: "400px" }}>
-                <Switch>
-                  {/* '/' Landing page is login/registration */}
-                  {/* Landing */}
 
-                  {/* change / path to login */}
-                  <PrivateRoute exact path="/" component={Dashboard} />
-                  <PrivateRoute
-                    path="/update-profile"
-                    exact
-                    component={UpdateProfile}
-                  />
-                  {/* <Route exact path='/' handleLogin={handleLogin} render={props => <Landing {...props} user={user} />} /> */}
-                  {/* <ProtectedRoute redirectTo='/' exact path='/dashboard' component={Dashboard} /> */}
-                  {/* When the user signs in and are authorized, they will be rerouted to My habits and Leaderboard */}
-                  {/* <Dashboard /> */}
-                  <Route path="/signup" component={SignUp} />
-                  <Route path="/login" component={Login} />
-                  <Route path="/leaderboard" component={Leaderboard} />
-                  <Route path="/dashboard" component={Dashboard} />
-                </Switch>
-              </div>
+              <Switch>
+                {/* '/' Landing page is login/registration */}
+                {/* Landing */}
+
+                {/* change / path to login */}
+                {/* <div className="w-100" style={{ maxWidth: "400px" }}> */}
+                <PrivateRoute exact path="/" component={Dashboard} />
+                <PrivateRoute
+                  path="/update-profile"
+                  exact
+                  component={UpdateProfile}
+                />
+                {/* <Route exact path='/' handleLogin={handleLogin} render={props => <Landing {...props} user={user} />} /> */}
+                {/* <ProtectedRoute redirectTo='/' exact path='/dashboard' component={Dashboard} /> */}
+                {/* When the user signs in and are authorized, they will be rerouted to My habits and Leaderboard */}
+                {/* <Dashboard /> */}
+                <Route path="/signup" component={SignUp} />
+                <Route path="/login" component={Login} />
+                <Route path="/leaderboard" component={Leaderboard} />
+                <Route path="/dashboard" component={Dashboard} />
+                {/* </div> */}
+              </Switch>
             </AuthProvider>
           </HabitProvider>
         </Router>

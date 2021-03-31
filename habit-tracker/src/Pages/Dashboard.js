@@ -57,7 +57,7 @@ export default function Dashboard() {
       <Button
         variant="primary"
         onClick={handleShow}
-        className="btn btn-primary w-100 mt-3"
+        className="btn btn-primary mt-3"
       >
         Add Habit
       </Button>
