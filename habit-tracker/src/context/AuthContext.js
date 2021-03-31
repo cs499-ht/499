@@ -12,10 +12,21 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
+  function signup(email, password, username) {
     // returns a promise
     // firebase has its own way to notify when user gets set
-    return auth.createUserWithEmailAndPassword(email, password);
+    return (
+      auth
+        .createUserWithEmailAndPassword(email, password)
+        // previous promise returns a UserCredential object
+        // need to destructure user out of UserCredential to update
+        .then(({ user }) =>
+          user
+            .updateProfile({ displayName: username })
+            .catch((error) => console.log(error))
+        )
+        .catch((error) => console.log(error))
+    );
   }
 
   // explicitly tell firebase to use session storage
@@ -41,7 +52,6 @@ export const AuthProvider = ({ children }) => {
     return user.updatePassword(password);
   }
 
-  // can't set display name when creating an account for the first time, have to update after user is authorized
   function updateDisplayName(displayName) {
     return user.updateProfile({ displayName: displayName });
   }
