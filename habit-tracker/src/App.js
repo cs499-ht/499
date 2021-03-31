@@ -51,13 +51,6 @@ function App() {
           </HabitProvider>
         </Router>
       </Container>
-
-      {/* Default text is "Add a habit above!" if no habits are found in DB */}
-      {/* {habits.length > 0 ? ( */}
-      {/* <AddHabit /> */}
-      {/* // ) : (
-      //   "Add a habit above!"
-      // )} */}
     </div>
   );
 }
