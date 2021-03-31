@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 
 export default function SignUp() {
   const emailRef = useRef();
+  const usernameRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
@@ -28,15 +29,16 @@ export default function SignUp() {
       // loading disables submit button so user cannot spam sign up
       setLoading(true);
       // wait for signup to finish
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signup(
+        emailRef.current.value,
+        passwordRef.current.value,
+        usernameRef.current.value
+      );
       // redirect
       history.push("/");
     } catch {
       setError("Failed to create an account");
     }
-
-    // done with try catch
-    setLoading(false);
   }
 
   return (
@@ -49,6 +51,10 @@ export default function SignUp() {
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
+            </Form.Group>
+            <Form.Group id="Username">
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" ref={usernameRef} required />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
