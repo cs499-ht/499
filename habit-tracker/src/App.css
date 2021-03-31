@@ -1,6 +1,8 @@
-html, body {
-  background-color: #FFF7F8;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  
+html,
+body {
+  background-color: #fff7f8;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 .App {
   text-align: center;
@@ -34,37 +36,37 @@ html, body {
 
 .all-habits-habit-completed {
   border-radius: 25px;
-  border-style: inset;  
+  border-style: inset;
   border-width: thin;
   margin-top: 10px;
-  background-color: #A1E5AB;
+  background-color: #a1e5ab;
   color: black;
 }
 
 .all-habits-habit {
   /* color: red; */
   border-radius: 25px;
-  border-style: inset;  
+  border-style: inset;
   border-width: thin;
   margin-top: 10px;
-  background-color: #5AA9E6;
+  background-color: #5aa9e6;
 }
 
 [class^="leaderboard-habit"] {
   /* color: red; */
   border-radius: 25px;
-  border-style: inset;  
+  border-style: inset;
   border-width: thin;
   margin-top: 10px;
-  background-color: #E2E1DF;
+  background-color: #e2e1df;
 }
 
 [class^="leaderboard-habit"][class$="1"] {
   border-radius: 25px;
-  border-style: inset;  
+  border-style: inset;
   border-width: thin;
   margin-top: 10px;
-  background-color: #E2E1DF;
+  background-color: #e2e1df;
 }
 
 .all-habits-container {
@@ -76,7 +78,7 @@ html, body {
 .leaderboard-container {
   display: block;
   width: 50%;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 @keyframes App-logo-spin {
   from {
@@ -84,5 +86,16 @@ html, body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 100%;
   }
 }
