@@ -18,20 +18,18 @@ export const AuthProvider = ({ children }) => {
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
-  // firebase sets local storage for you
+  // explicitly tell firebase to use session storage
   // verify if user signs in, firebase connects user for you and uses onAuthStateChange
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return auth.setPersistence("session").then(() => {
+      return auth.signInWithEmailAndPassword(email, password);
+    });
   }
 
-  // TODO REFRESHING localhost:3000 STILL SHOWS USER
-  // THIS ISN'T CLEARING OUT INDEXED DB LOCAL STORAGE
   // MODIFY AUTH STATE PERSISTANCE
-  // need to change firebase.auth().setPersistance to session
   function logout() {
-    // console.log("logging out");
-    // console.log(user);
-    // setUser({});
+    //explicitly clear session storage; otherwise it stays after signing out
+    sessionStorage.clear();
     return auth.signOut;
   }
 
