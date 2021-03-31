@@ -12,9 +12,16 @@ const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
 
   // find only current user's habits
   const filtered = habits.reduce(
-    (result, { _id, username, description, totalCount, completed }) =>
-      username === user.email
-        ? result.concat({ _id, username, description, totalCount, completed })
+    (result, { _id, username, email, description, totalCount, completed }) =>
+      email === user.email
+        ? result.concat({
+            _id,
+            username,
+            email,
+            description,
+            totalCount,
+            completed,
+          })
         : result,
     []
   );
