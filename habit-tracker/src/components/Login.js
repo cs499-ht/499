@@ -24,13 +24,11 @@ export default function Login() {
       setLoading(true);
       // wait for login to finish
       await login(emailRef.current.value, passwordRef.current.value);
+      //redirect to dashboard
       history.push("/");
     } catch {
       setError("Failed to sign in");
     }
-
-    // done with try catch
-    setLoading(false);
   }
 
   return (
@@ -48,7 +46,7 @@ export default function Login() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            {/* disable sign up button when trying to submit */}
+            {/* disable login button when trying to submit */}
             <Button disabled={loading} className="w-100" type="submit">
               Log In
             </Button>
