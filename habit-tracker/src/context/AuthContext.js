@@ -64,6 +64,7 @@ export const AuthProvider = ({ children }) => {
   //     auth.onAuthStateChanged(setUser);
   // },[]);
 
+  // data/functions to export
   const value = {
     user,
     login,
