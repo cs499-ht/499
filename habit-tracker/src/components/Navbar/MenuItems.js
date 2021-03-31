@@ -9,4 +9,9 @@ export const MenuItems = [
     path: "/leaderboard",
     cName: "nav-links",
   },
+  {
+    title: "Login",
+    path: "/Login",
+    cName: "nav-links",
+  },
 ];
