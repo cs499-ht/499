@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import Navbar from "../components/Navbar/Navbar";
+import React, { useState } from "react";
 // import { Button, Input } from "@material-ui/core";
 // import { auth } from "../firebase";
-import { Route, Redirect } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.js";
 import { Card, Button, Alert, Modal } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";

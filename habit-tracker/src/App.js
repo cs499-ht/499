@@ -1,14 +1,12 @@
 // import Header from "./components/Header";
-import Habits from "./containers/Habits";
-import AddHabit from "./components/AddHabit";
 import { HabitProvider } from "./context/HabitContext";
 import "./App.css";
 import Leaderboard from "./containers/Leaderboard";
-import Landing from "./Pages/Landing";
+// import Landing from "./Pages/Landing";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./Pages/Dashboard";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AuthProvider } from "./context/AuthContext.js";
 import SignUp from "./components/SignUp";
 import { Container } from "react-bootstrap";

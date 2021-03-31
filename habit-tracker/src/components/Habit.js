@@ -1,14 +1,8 @@
-import { FcCancel, FcOk, FcUndo } from "react-icons/fc";
 // import PropTypes from "prop-types";
-import { useContext, useRef, useState } from "react";
 import { useHabit } from "../context/HabitContext";
-import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../context/AuthContext";
+import { Button, Card } from "react-bootstrap";
 
 const Habit = ({ habit, lead, container }) => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const { user } = useAuth();
   const { toggleComplete, deleteHabit } = useHabit();
 
   return (

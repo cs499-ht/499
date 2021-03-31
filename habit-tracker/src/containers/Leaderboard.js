@@ -1,6 +1,4 @@
 import Habit from "../components/Habit";
-import { useContext } from "react";
-// import PropTypes from "prop-types";
 import { useHabit } from "../context/HabitContext";
 
 const Leaderboard = (/*{ habits, onDelete, toggleComplete }*/) => {

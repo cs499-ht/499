@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from "react";
+import { useState, useRef } from "react";
 import { useHabit } from "../context/HabitContext";
 // import "./css/AddHabit.css";
 import { Form, Button, Card, Alert } from "react-bootstrap";
