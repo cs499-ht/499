@@ -23,6 +23,7 @@ router.route("/add").post((req, res) => {
       } else {
         const newHabit = new Habit({
           username,
+          email,
           description,
           completed,
           totalCount,

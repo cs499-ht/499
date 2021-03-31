@@ -23,12 +23,13 @@ const AddHabit = (handleClose) => {
     setLoading(true);
 
     const habit = {
-      username: usernameRef.current.value,
+      username: user.displayName,
+      email: user.email,
       description: descriptionRef.current.value,
       totalCount: totalCountRef.current.value,
       completed: completedRef.current.checked,
     };
-    // console.log(habit);
+    console.log(habit);
 
     saveHabit(habit);
 
@@ -46,15 +47,6 @@ const AddHabit = (handleClose) => {
           <h2 className="text-center mb-4">Add Habit</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={createHabit}>
-            <Form.Group id="username">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                ref={usernameRef}
-                required
-                defaultValue={user.email}
-              />
-            </Form.Group>
             <Form.Group id="habit">
               <Form.Label>Habit Description</Form.Label>
               <Form.Control
