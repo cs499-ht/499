@@ -1,8 +1,13 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 
 export const HabitContext = createContext();
 
-const HabitProvider = ({ children }) => {
+// useHabit hook to access HabitContext instead of rewriting it in every component
+export function useHabit() {
+  return useContext(HabitContext);
+}
+
+export const HabitProvider = ({ children }) => {
   const [habits, setHabits] = useState([]);
 
   // load initial state from backend
@@ -25,7 +30,7 @@ const HabitProvider = ({ children }) => {
 
   // save habit
   const saveHabit = async (habit) => {
-    console.log(habit);
+    console.log("saving habit", JSON.stringify(habit));
     const res = await fetch("http://localhost:5000/habits/add", {
       method: "POST",
       headers: {
@@ -91,13 +96,15 @@ const HabitProvider = ({ children }) => {
     );
   };
 
+  // data/functions to export
+  const value = {
+    habits,
+    saveHabit,
+    deleteHabit,
+    toggleComplete,
+  };
+
   return (
-    <HabitContext.Provider
-      value={{ habits, saveHabit, deleteHabit, toggleComplete }}
-    >
-      {children}
-    </HabitContext.Provider>
+    <HabitContext.Provider value={value}>{children}</HabitContext.Provider>
   );
 };
-
-export default HabitProvider;

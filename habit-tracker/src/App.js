@@ -1,32 +1,57 @@
 // import Header from "./components/Header";
-import Habits from "./containers/Habits";
-import AddHabit from "./components/AddHabit";
-import HabitProvider from "./context/HabitContext";
+import { HabitProvider } from "./context/HabitContext";
 import "./App.css";
 import Leaderboard from "./containers/Leaderboard";
+// import Landing from "./Pages/Landing";
+import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from "./Pages/Dashboard";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from "react";
+import { AuthProvider } from "./context/AuthContext.js";
+import SignUp from "./components/SignUp";
+import { Container } from "react-bootstrap";
+import Login from "./components/Login";
+import UpdateProfile from "./components/UpdateProfile";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <div className="App">
-      <HabitProvider>
-        <AddHabit />
-        <Leaderboard />
-        <Habits />
-      </HabitProvider>
+      <Container
+        className="flex flex-column width-full d-flex align-items-center justify-content-center"
+        style={{ minHeight: "100vh" }}
+      >
+        <Router>
+          <HabitProvider>
+            <AuthProvider>
+              <Navbar className="width-full max-width-full" />
 
-      {/* <Header
-        onAdd={() => setshowAddHabit(!showAddHabit)}
-        showAdd={showAddHabit}
-      /> */}
-      {/* && - shortcut for ternary w/o else block */}
-      {/* {showAddHabit && <AddHabit onAdd={addHabit} />} */}
+              <Switch>
+                {/* '/' Landing page is login/registration */}
+                {/* Landing */}
 
-      {/* Default text is "Add a habit above!" if no habits are found in DB */}
-      {/* {habits.length > 0 ? ( */}
-      {/* <AddHabit /> */}
-      {/* // ) : (
-      //   "Add a habit above!"
-      // )} */}
+                {/* change / path to login */}
+                {/* <div className="w-100" style={{ maxWidth: "400px" }}> */}
+                <PrivateRoute exact path="/" component={Dashboard} />
+                <PrivateRoute
+                  path="/update-profile"
+                  exact
+                  component={UpdateProfile}
+                />
+                {/* <Route exact path='/' handleLogin={handleLogin} render={props => <Landing {...props} user={user} />} /> */}
+                {/* <ProtectedRoute redirectTo='/' exact path='/dashboard' component={Dashboard} /> */}
+                {/* When the user signs in and are authorized, they will be rerouted to My habits and Leaderboard */}
+                {/* <Dashboard /> */}
+                <Route path="/signup" component={SignUp} />
+                <Route path="/login" component={Login} />
+                <Route path="/leaderboard" component={Leaderboard} />
+                <Route path="/dashboard" component={Dashboard} />
+                {/* </div> */}
+              </Switch>
+            </AuthProvider>
+          </HabitProvider>
+        </Router>
+      </Container>
     </div>
   );
 }

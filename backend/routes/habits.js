@@ -4,13 +4,14 @@ const Habit = require("../models/habit.model");
 //first route 'localhost:5000/habits/'
 router.route("/").get((req, res) => {
   Habit.find() //mongoose method that gets all habits from MongoDB Atlas DB; returns a promise
-    .then((users) => res.json(users))
+    .then((habits) => res.json(habits))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 //second route 'localhost:5000/habits/add'
 router.route("/add").post((req, res) => {
   const username = req.body.username;
+  const email = req.body.email;
   const description = req.body.description;
   const completed = req.body.completed;
   const totalCount = req.body.totalCount;
@@ -23,6 +24,7 @@ router.route("/add").post((req, res) => {
       } else {
         const newHabit = new Habit({
           username,
+          email,
           description,
           completed,
           totalCount,

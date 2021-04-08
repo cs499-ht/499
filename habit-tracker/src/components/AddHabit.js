@@ -1,97 +1,83 @@
-import { useState, useContext } from "react";
-import { HabitContext } from "../context/HabitContext";
-import "./css/AddHabit.css"; 
+import { useState, useRef } from "react";
+import { useHabit } from "../context/HabitContext";
+// import "./css/AddHabit.css";
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { useAuth } from "../context/AuthContext";
 
-const AddHabit = () => {
-  const [username, setUsername] = useState("");
-  const [description, setDescription] = useState("");
-  const [completed, setCompleted] = useState(false);
-  const [totalCount, setTotalCount] = useState(0);
+const AddHabit = (handleClose) => {
+  const usernameRef = useRef();
+  const descriptionRef = useRef();
+  const totalCountRef = useRef();
+  const completedRef = useRef();
 
-  const { saveHabit } = useContext(HabitContext);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const { user } = useAuth();
+  const { saveHabit } = useHabit();
 
-  const addNewHabit = (e) => {
+  function createHabit(e) {
     e.preventDefault();
+    // reset error
+    setError("");
+    // loading disables submit button so user cannot spam sign up
+    setLoading(true);
 
-    if (!username || !description) {
-      alert("Please add a username and description");
-      return;
-    }
+    const habit = {
+      username: user.displayName,
+      email: user.email,
+      description: descriptionRef.current.value,
+      totalCount: totalCountRef.current.value,
+      completed: completedRef.current.checked,
+    };
+    // console.log(habit);
 
-    // if (!totalCount) {
-    //   alert("Please enter a number for total count");
-    //   return;
-    // }
+    saveHabit(habit);
 
-    saveHabit({ username, description, completed, totalCount });
-
-    //reset states
-    setUsername("");
-    setDescription("");
-    setCompleted(false);
-    setTotalCount(0);
-  };
+    // reset all values
+    descriptionRef.current.value = "";
+    totalCountRef.current.value = "0";
+    completedRef.current.checked = false;
+    setLoading(false);
+  }
 
   return (
-    <div className="container">
-      <form className="add-habit-form" onSubmit={addNewHabit}>
-        <div className="form-control">
-          <label className="add-habit-label">Username</label>
-          <input
-            className="add-habit-input"
-            type="text"
-            placeholder="Add username"
-            value={username}
-            // controlled component
-            // event target value
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div className="form-control">
-          <label className="add-habit-label">Habit</label>
-          <input
-            className="add-habit-input"
-            type="text"
-            placeholder="Add habit description"
-            value={description}
-            // controlled component
-            // event target value
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <div className="form-control">
-          <label className="add-habit-label">Total Count</label>
-          <input
-            className="add-habit-input"
-            type="text"
-            placeholder="Total count"
-            value={totalCount}
-            // controlled component
-            // event target value
-            onChange={(e) => {
-              // console.log(typeof e.target.value);
-              setTotalCount(Number(e.target.value));
-              // console.log(totalCount);
-              // console.log(typeof totalCount);
-            }}
-          />
-        </div>
-        <div className="form-control">
-          <label className="add-habit-label">Completed</label>
-          <input
-            className="add-habit-checkbox"
-            type="checkbox"
-            checked={completed}
-            value={completed}
-            // controlled component
-            // checkbox target value
-            onChange={(e) => setCompleted(e.currentTarget.checked)}
-          />
-        </div>
-
-        <input className="submit submit-ripple" type="submit" value="Save Habit" />
-      </form>
-    </div>
+    <>
+      <Card>
+        <Card.Body>
+          <h2 className="text-center mb-4">Add Habit</h2>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form onSubmit={createHabit}>
+            <Form.Group id="habit">
+              <Form.Label>Habit Description</Form.Label>
+              <Form.Control
+                type="text"
+                ref={descriptionRef}
+                required
+                placeholder="Add habit description"
+              />
+            </Form.Group>
+            <Form.Group id="total-count">
+              <Form.Label>Total Count</Form.Label>
+              <Form.Control
+                type="number"
+                min="0"
+                ref={totalCountRef}
+                required
+                defaultValue={0}
+              />
+            </Form.Group>
+            <Form.Group id="completed">
+              <Form.Label>Completed</Form.Label>
+              <Form.Control type="checkbox" ref={completedRef} />
+            </Form.Group>
+            {/* disable add button when trying to submit */}
+            <Button disabled={loading} className="w-100" type="submit">
+              Save Habit
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
+    </>
   );
 };
 
