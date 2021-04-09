@@ -14,7 +14,7 @@ const Leaderboard = (/*{ habits, onDelete, toggleComplete }*/) => {
 
   return (
     <div className={`${container}-container`}>
-      <h1>Habit Leaderboard</h1>
+      <h1>Daily Habit Leaderboard</h1>
       {sortedHabits.map((habit) => (
         <Habit
           habit={habit}

@@ -31,7 +31,7 @@ const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
 
   return (
     <div className={`${container}-container`}>
-      <h1>My Habits</h1>
+      <h1>My Daily Habits</h1>
       {filtered.map((habit) => (
         <Habit
           habit={habit}
