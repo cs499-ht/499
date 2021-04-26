@@ -8,29 +8,36 @@
 }
 
 .App-NavMenu {
-	display: grid;
-	grid-template-columns: repeat(4,auto);
-	grid-gap: 5px;
-	list-style: none;
-	text-align: center;
-	width: 70vw;
-	justify-content: end;
-	margin-right: 2rem;
+   	top: 0px;	
+	margin-bottom: 2em;
+	background-color: #555B6E;
+}
+.navbar-light .navbar-brand{
+	color: #FAF9F9; 
 }
 
+.navbar-brand {
+	font-size: xx-large;
+	font-weight: 500;
+}
+.navbar-brand:hover {
+	color: #FAF9F9 !important; 
+}
 .nav-links:hover {
-	background-color: #F88066;
+	margin: 0 !important; 
+	background-color: #89B0AE;
 	border-radius: 4px;
 	transition: all 0.2s ease-out;
 }
 
-.nav-links a {
+.nav-links a{
 	text-decoration: none;
-	color: #000;
-	font-size: 18px;
+	color: #FAF9F9; 
+	font-size: 16px;
 	width: 100%;
 	display: flex;
 	align-items: center;
-	padding: 0px 16px;
+	margin-left: 5px; 
+	margin-right: 5px; 
 	border-radius: 4px;
 }

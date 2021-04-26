@@ -1,13 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&family=Merriweather+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&family=Merriweather+Sans:wght@300;600&display=swap');
 html,
 body {
-  background-color: #fff7f8;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  background-color: #FAF9F9;
+  /* font-family: 'Lato', sans-serif !important; */
+  /* font-family: 'Merriweather Sans', sans-serif !important; */
+  font-family: 'Josefin Sans', sans-serif !important;
 }
 .App {
   text-align: center;
+  background-color: #FAF9F9;
 }
-
+.btn-primary{
+  background-color: #89B0AE!important;
+}
+.btn-success{
+  background-color: #87E752!important;
+}
+.btn-failure{
+  background-color: #DB5461 !important;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -73,11 +86,11 @@ body {
   display: block;
   width: 50%;
   margin: 0 auto;
+  padding-top:2rem; 
 }
 
 .leaderboard-container {
   display: block;
-  width: 50%;
   margin: 0 auto;
 }
 @keyframes App-logo-spin {
