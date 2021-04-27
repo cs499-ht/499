@@ -19,7 +19,6 @@ function App() {
     <div className="App">
       <Container
         className="flex flex-column width-full d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
       >
         <Router>
           <HabitProvider>
