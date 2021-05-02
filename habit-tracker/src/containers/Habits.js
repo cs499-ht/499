@@ -1,4 +1,5 @@
 import Habit from "../components/Habit";
+import HabitRing from "../components/HabitRing"
 import { useHabit } from "../context/HabitContext";
 import { useAuth } from "../context/AuthContext";
 
@@ -25,6 +26,13 @@ const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
         : result,
     []
   );
+  let totalHabits = Object.keys(filtered).length;
+  let counter = 0; 
+  filtered.forEach(element => {
+    if(element.completed === true){
+      counter++
+    }  
+  });
 
   console.log("personal habits", filtered);
   console.log("all habits", habits);
@@ -32,6 +40,7 @@ const Habits = (/*{ habits, onDelete, toggleComplete }*/) => {
   return (
     <div className={`${container}-container`}>
       <h1>My Daily Habits</h1>
+      <HabitRing completed={counter} total={totalHabits}/>
       {filtered.map((habit) => (
         <Habit
           habit={habit}
