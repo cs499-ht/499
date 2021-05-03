@@ -1,0 +1,28 @@
+.left-confetti-container {
+    position: fixed;
+    top:20px; 
+    left: 1px; 
+    z-index: 50; 
+}
+.right-confetti-container {
+    position: fixed;
+    top:20px; 
+    right: 1px; 
+    z-index: 50; 
+}
+.habit-ring-count{
+    padding-top: 40px;
+    color: #E18F14; 
+}
+.ring {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    transform: rotate(90deg);
+}
+
+.ring-circle {
+    stroke-dasharray: 10 20;
+    transition: stroke-dashoffset 0.60s ease;
+}
