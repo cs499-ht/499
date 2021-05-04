@@ -100,7 +100,7 @@ const Video = () => {
             muted
             ref={myVideo}
             autoPlay
-            style={{ width: "300px" }}
+            style={{ width: "500px" }}
           />
         )}
       </div>
@@ -110,7 +110,7 @@ const Video = () => {
             playsInline
             ref={userVideo}
             autoPlay
-            style={{ width: "300px" }}
+            style={{ width: "500px" }}
           />
         ) : null}
       </div>
