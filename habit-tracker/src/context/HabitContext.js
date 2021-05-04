@@ -78,6 +78,7 @@ export const HabitProvider = ({ children }) => {
     setHabits([
       ...habits,
       {
+        id: res.id,
         ...habit,
       },
     ]);
