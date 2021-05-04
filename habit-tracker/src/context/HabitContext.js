@@ -12,9 +12,9 @@ export const HabitProvider = ({ children }) => {
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
-    db.collection('habits').onSnapshot(snapshot => {
-      setHabits(snapshot.docs.map(doc => doc.data()))
-    })
+    db.collection("habits").onSnapshot((snapshot) => {
+      setHabits(snapshot.docs.map((doc) => doc.data()));
+    });
   }, []);
 
   // load initial state from backend
@@ -28,22 +28,22 @@ export const HabitProvider = ({ children }) => {
   // }, []);
 
   //fetch habits
-//  can't use async w/ useEffect, need to create async
+  //  can't use async w/ useEffect, need to create async
   const fetchHabits = async () => {
     // const res = await fetch("http://localhost:5000/habits");
     // const data = await res.json();
     // return data;
-    const res = db.collection('habits')
-    const data = await res.get()
+    const res = db.collection("habits");
+    const data = await res.get();
     if (!data.exists) {
-      console.log('No such document');
+      console.log("No such document");
     } else {
       data.get().then((snapshot) => {
-        snapshot.docs.forEach(doc => {
-          console.log('Document data:', doc.data());
+        snapshot.docs.forEach((doc) => {
+          console.log("Document data:", doc.data());
           return doc.data();
-        })
-      })
+        });
+      });
     }
   };
 
@@ -60,20 +60,22 @@ export const HabitProvider = ({ children }) => {
   //   const data = await res.json();
   //   setHabits([...habits, data]);
   // };
-// add new habit
+  // add new habit
   const saveHabit = async (habit) => {
-    const res = await db.collection('habits').doc();
-    
-    const data = await res.set({habit}); 
-    console.log('The data added is: ', data);
+    const res = await db.collection("habits").doc();
 
-    setHabits([...habits, {
-      id: res.id,
-      ...habit
-    }]);
-    
-    console.log('Added document with ID: ', res.id); 
-  }; 
+    const data = await res.set(habit);
+    console.log("The data added is: ", data);
+
+    setHabits([
+      ...habits,
+      {
+        ...habit,
+      },
+    ]);
+
+    console.log("Added document with ID: ", res.id);
+  };
 
   // delete habit
   // const deleteHabit = async (id) => {
@@ -91,12 +93,15 @@ export const HabitProvider = ({ children }) => {
     // const res = await fetch(`http://localhost:5000/habits/${id}`);
     // const data = await res.json();
     // return data;
-    const res = await db.collection('habits').get().then((snapshot => {
-      snapshot.docs.forEach(doc => ({
-        id: doc.id,
-        habit: doc.data()
-      }));
-    }));
+    const res = await db
+      .collection("habits")
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => ({
+          id: doc.id,
+          habit: doc.data(),
+        }));
+      });
   };
 
   //toggle complete
@@ -134,7 +139,7 @@ export const HabitProvider = ({ children }) => {
     //update UI with data from server
     setHabits(
       // only update single habit
-      habits.map(({id, habit}) =>
+      habits.map(({ id, habit }) =>
         habit._id === id
           ? { ...habit, completed: data.completed, totalCount: data.totalCount }
           : habit
