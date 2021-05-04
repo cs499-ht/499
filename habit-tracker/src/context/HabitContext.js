@@ -11,12 +11,20 @@ export function useHabit() {
 export const HabitProvider = ({ children }) => {
   const [habits, setHabits] = useState([]);
 
+  // useEffect(() => {
+  //   db.collection("habits").onSnapshot((snapshot) => {
+  //     setHabits(snapshot.docs.map((doc) => doc.data()));
+  //   });
+  // }, []);
+
   useEffect(() => {
-    db.collection("habits").onSnapshot((snapshot) => {
-      setHabits(snapshot.docs.map((doc) => doc.data()));
+    db.collection('habits').onSnapshot(snapshot => {
+      setHabits(snapshot.docs.map(doc => ({
+        id: doc.id, 
+        habit: doc.data()
+      })));
     });
   }, []);
-
   // load initial state from backend
   // useEffect(() => {
   //   // calls fetchHabits which returns a promise
