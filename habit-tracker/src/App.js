@@ -13,6 +13,7 @@ import { Container } from "react-bootstrap";
 import Login from "./components/Login";
 import UpdateProfile from "./components/UpdateProfile";
 import Navbar from "./components/Navbar/Navbar";
+import Video from "./components/Video";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
                 <Route path="/leaderboard" component={Leaderboard} />
                 <Route path="/dashboard" component={Dashboard} />
                 {/* </div> */}
+                <Route path="/video" component={Video} />
               </Switch>
             </AuthProvider>
           </HabitProvider>
