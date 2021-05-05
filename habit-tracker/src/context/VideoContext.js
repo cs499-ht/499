@@ -15,7 +15,8 @@ export function useVideo() {
   return useContext(VideoContext);
 }
 
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
+const socket = io("https://warm-wildwood-81069.herokuapp.com");
 
 export const VideoProvider = ({ children }) => {
   const [callAccepted, setCallAccepted] = useState(false);
@@ -35,8 +36,7 @@ export const VideoProvider = ({ children }) => {
       .then((currentStream) => {
         setStream(currentStream);
         myVideo.current.srcObject = currentStream;
-        console.log("useEffect console log");
-        console.log(myVideo);
+        console.log("Getting initial video stream");
         console.log(myVideo.current.srcObject);
       })
       .catch((err) => console.log("Error getting media devices: " + err));
@@ -50,29 +50,34 @@ export const VideoProvider = ({ children }) => {
 
   const answerCall = () => {
     setCallAccepted(true);
-    console.log("accepted call");
-    console.log("answercall console log");
-    console.log(userVideo);
-
+    console.log("Answering call!");
     const peer = new Peer({ initiator: false, trickle: false, stream });
-
+    console.log("Creating new Peer");
     peer.on("signal", (data) => {
       socket.emit("answerCall", { signal: data, to: call.from });
+      console.log("Answering call from: " + call.from);
     });
 
     peer.on("stream", (currentStream) => {
       userVideo.current.srcObject = currentStream;
+      console.log("Getting other user's video");
       console.log(userVideo.current.srcObject);
     });
 
     peer.signal(call.signal);
 
     connectionRef.current = peer;
+    console.log("Peer after setting connectionRef" + peer);
+    console.log(
+      "connectionRef after setting connectionRef" + connectionRef.current
+    );
+
+    peer.on("error", (err) => {
+      console.log(err);
+    });
   };
 
   const callUser = (id) => {
-    console.log("Calling User:" + id);
-    console.log("From: " + name + " ID: " + me);
     const peer = new Peer({ initiator: true, trickle: false, stream });
 
     peer.on("signal", (data) => {
@@ -90,18 +95,19 @@ export const VideoProvider = ({ children }) => {
 
     socket.on("callAccepted", (signal) => {
       setCallAccepted(true);
-
       peer.signal(signal);
     });
 
     connectionRef.current = peer;
+
+    peer.on("error", (err) => {
+      console.log(err);
+    });
   };
 
   const leaveCall = () => {
     setCallEnded(true);
-
     connectionRef.current.destroy();
-
     window.location.reload();
   };
 
