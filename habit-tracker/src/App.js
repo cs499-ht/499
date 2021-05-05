@@ -21,8 +21,8 @@ function App() {
     <div className="App">
       <Container className="flex flex-column width-full d-flex align-items-center justify-content-center">
         <Router>
-          <HabitProvider>
-            <VideoProvider>
+          <VideoProvider>
+            <HabitProvider>
               <AuthProvider>
                 <Navbar className="width-full max-width-full" />
 
@@ -47,11 +47,12 @@ function App() {
                   <Route path="/leaderboard" component={Leaderboard} />
                   <Route path="/dashboard" component={Dashboard} />
                   {/* </div> */}
+
                   <Route path="/video" component={Video} />
                 </Switch>
               </AuthProvider>
-            </VideoProvider>
-          </HabitProvider>
+            </HabitProvider>
+          </VideoProvider>
         </Router>
       </Container>
     </div>
