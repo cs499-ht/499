@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useVideo } from "../context/VideoContext";
 import CallerNotification from "./CallerNotification";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const CallOptions = ({ children }) => {
   const {
@@ -29,6 +30,9 @@ const CallOptions = ({ children }) => {
             >
               <Form.Label>Name</Form.Label>
               <Form.Control type="text" ref={nameRef} required />
+              <CopyToClipboard text={me}>
+                <Button>Copy my ID</Button>
+              </CopyToClipboard>
             </Form.Group>
           </Form>
         </Card.Body>
@@ -38,17 +42,20 @@ const CallOptions = ({ children }) => {
             <Form.Group id="callee-id">
               <Form.Label>ID to call</Form.Label>
               <Form.Control type="text" ref={idToCallRef} required />
-              <Button
-                onClick={() => {
-                  callUser(idToCallRef.current.value);
-                }}
-              >
-                Call
-              </Button>
+              {callAccepted && !callEnded ? (
+                <Button onClick={leaveCall}>Hang Up</Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    callUser(idToCallRef.current.value);
+                  }}
+                >
+                  Call
+                </Button>
+              )}
             </Form.Group>
           </Form>
         </Card.Body>
-        {children}
       </Card>
       <CallerNotification />
     </div>
