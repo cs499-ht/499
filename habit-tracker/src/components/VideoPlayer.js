@@ -15,6 +15,7 @@ const Video = () => {
   return (
     <div className="video-player">
       <div className="my-video">
+        <h2>My Video</h2>
         {stream && (
           <video
             playsInline
@@ -27,12 +28,15 @@ const Video = () => {
       </div>
       <div className="peer-video">
         {callAccepted && !callEnded ? (
-          <video
-            playsInline
-            ref={userVideo}
-            autoPlay
-            style={{ width: "500px" }}
-          />
+          <>
+            <h2>Peer Video</h2>
+            <video
+              playsInline
+              ref={userVideo}
+              autoPlay
+              style={{ width: "500px" }}
+            />{" "}
+          </>
         ) : null}
       </div>
       <CallOptions />
