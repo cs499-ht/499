@@ -6,16 +6,15 @@ const Video = () => {
     name,
     callAccepted,
     myVideo,
-    userVideo,
+    callerVideo,
     callEnded,
     stream,
-    call,
-    me,
+    callerName,
   } = useVideo();
   return (
     <div className="video-player">
       <div className="my-video">
-        <h2>My Video</h2>
+        <h2>{name || "name"}</h2>
         {stream && (
           <video
             playsInline
@@ -29,10 +28,10 @@ const Video = () => {
       <div className="peer-video">
         {callAccepted && !callEnded ? (
           <>
-            <h2>Peer Video</h2>
+            <h2>{callerName}</h2>
             <video
               playsInline
-              ref={userVideo}
+              ref={callerVideo}
               autoPlay
               style={{ width: "500px" }}
             />{" "}
