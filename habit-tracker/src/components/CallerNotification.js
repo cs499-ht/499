@@ -2,16 +2,20 @@ import { Button } from "react-bootstrap";
 import { useVideo } from "../context/VideoContext";
 
 const CallerNotification = () => {
-  const { answerCall, call, callAccepted } = useVideo();
+  const { answerCall, receivingCall, callAccepted, callerName } = useVideo();
 
   return (
     <>
-      {call.isReceivingCall && !callAccepted && (
+      {/* <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <Button onClick={answerCall}>Answer</Button>
+      </div> */}
+
+      {receivingCall && !callAccepted ? (
         <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <h1>{call.name} is calling:</h1>
+          <h1>{callerName} is calling:</h1>
           <Button onClick={answerCall}>Answer</Button>
         </div>
-      )}
+      ) : null}
     </>
   );
 };
