@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { io } from "socket.io-client";
 import Peer from "simple-peer";
+// import { useLocation } from "react-router-dom";
 
 export const VideoContext = createContext();
 
@@ -16,115 +17,124 @@ export function useVideo() {
 }
 
 // const socket = io("http://localhost:5000");
-const socket = io("https://warm-wildwood-81069.herokuapp.com");
+const socket = io("https://video-sockets.herokuapp.com/");
 
 export const VideoProvider = ({ children }) => {
+  // MY INFO
+  const [self, setSelf] = useState("");
+  const [name, setName] = useState("");
+  const [stream, setStream] = useState();
+
+  // CALLER INFO
+  const [callerID, setCallerID] = useState("");
+  const [callerName, setCallerName] = useState("");
+  const [callerSignal, setCallerSignal] = useState();
+
+  //CALL STATUS
+  const [receivingCall, setReceivingCall] = useState(false);
   const [callAccepted, setCallAccepted] = useState(false);
   const [callEnded, setCallEnded] = useState(false);
-  const [stream, setStream] = useState();
-  const [name, setName] = useState("");
-  const [call, setCall] = useState({});
-  const [me, setMe] = useState("");
 
+  //VIDEO REFS
   const myVideo = useRef();
-  const userVideo = useRef();
+  const callerVideo = useRef();
   const connectionRef = useRef();
 
+  // BAD HACKY WAY: force refresh with router.useLocation
+  // const location = useLocation();
+
+  // first load anywhere besides /video will TypeError: Cannot set property 'srcObject' of undefined
+  // console log error
+  // BAD HACKY WAY: force refresh with router.useLocation
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
-      .then((currentStream) => {
-        setStream(currentStream);
-        myVideo.current.srcObject = currentStream;
-        console.log("Getting initial video stream");
+      .then((stream) => {
+        setStream(stream);
+        myVideo.current.srcObject = stream;
         console.log(myVideo.current.srcObject);
       })
-      .catch((err) => console.log("Error getting media devices: " + err));
+      .catch((err) => console.log(err));
 
-    socket.on("me", (id) => setMe(id));
-
-    socket.on("callUser", ({ from, name: callerName, signal }) => {
-      setCall({ isReceivingCall: true, from, name: callerName, signal });
-    });
-  }, []);
-
-  const answerCall = () => {
-    setCallAccepted(true);
-    console.log("Answering call!");
-    const peer = new Peer({ initiator: false, trickle: false, stream });
-    console.log("Creating new Peer");
-    peer.on("signal", (data) => {
-      socket.emit("answerCall", { signal: data, to: call.from });
-      console.log("Answering call from: " + call.from);
+    socket.on("self", (id) => {
+      setSelf(id);
+      console.log(id);
     });
 
-    peer.on("stream", (currentStream) => {
-      userVideo.current.srcObject = currentStream;
-      console.log("Getting other user's video");
-      console.log(userVideo.current.srcObject);
+    socket.on("callUser", ({ from, name, signal }) => {
+      setReceivingCall(true);
+      setCallerID(from);
+      setCallerName(name);
+      setCallerSignal(signal);
+      console.log(callerName + " IS CALLING YOU WITH ID: " + from);
     });
+  }, []); //BAD HACKY WAY: refresh on location change to set new media stream
 
-    peer.signal(call.signal);
-
-    connectionRef.current = peer;
-    console.log("Peer after setting connectionRef" + peer);
-    console.log(
-      "connectionRef after setting connectionRef" + connectionRef.current
-    );
-
-    peer.on("error", (err) => {
-      console.log(err);
+  const callUser = (userToCall) => {
+    console.log("From: " + self + " Calling: " + userToCall);
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+      stream: stream,
     });
-  };
-
-  const callUser = (id) => {
-    const peer = new Peer({ initiator: true, trickle: false, stream });
-
     peer.on("signal", (data) => {
       socket.emit("callUser", {
-        userToCall: id,
+        userToCall: userToCall,
         signalData: data,
-        from: me,
-        name,
+        from: self,
+        name: name,
       });
     });
-
-    peer.on("stream", (currentStream) => {
-      userVideo.current.srcObject = currentStream;
+    peer.on("stream", (stream) => {
+      callerVideo.current.srcObject = stream;
     });
-
     socket.on("callAccepted", (signal) => {
       setCallAccepted(true);
       peer.signal(signal);
     });
 
     connectionRef.current = peer;
+  };
 
-    peer.on("error", (err) => {
-      console.log(err);
+  const answerCall = () => {
+    setCallAccepted(true);
+    const peer = new Peer({
+      initiator: false,
+      trickle: false,
+      stream: stream,
     });
+    peer.on("signal", (data) => {
+      socket.emit("answerCall", { signal: data, to: callerID });
+    });
+    peer.on("stream", (stream) => {
+      callerVideo.current.srcObject = stream;
+    });
+
+    peer.signal(callerSignal);
+    connectionRef.current = peer;
   };
 
   const leaveCall = () => {
     setCallEnded(true);
     connectionRef.current.destroy();
-    window.location.reload();
   };
 
   // data/functions to export
   const value = {
-    call,
     callAccepted,
     myVideo,
-    userVideo,
+    callerVideo,
     stream,
     name,
     setName,
     callEnded,
-    me,
+    receivingCall,
+    self,
     callUser,
     leaveCall,
     answerCall,
+    callerID,
+    callerName,
   };
 
   return (
