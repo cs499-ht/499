@@ -1,14 +1,13 @@
-import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import React, { useRef } from "react";
+import { Form, Button, Card } from "react-bootstrap";
 import { useVideo } from "../context/VideoContext";
 import CallerNotification from "./CallerNotification";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-const CallOptions = ({ children }) => {
+const CallOptions = () => {
   const {
-    me,
+    self,
     callAccepted,
-    name,
     setName,
     callEnded,
     leaveCall,
@@ -22,7 +21,11 @@ const CallOptions = ({ children }) => {
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Call Options</h2>
-          <h3>My ID: {me}</h3>
+          {self ? (
+            <h3 style={{ color: "green" }}>Status: Online</h3>
+          ) : (
+            <h3 style={{ color: "red" }}>Status: Offline</h3>
+          )}
           <Form>
             <Form.Group
               id="name"
@@ -30,8 +33,8 @@ const CallOptions = ({ children }) => {
             >
               <Form.Label>Name</Form.Label>
               <Form.Control type="text" ref={nameRef} required />
-              <CopyToClipboard text={me}>
-                <Button>Copy my ID</Button>
+              <CopyToClipboard text={self}>
+                <Button>Copy my Call ID</Button>
               </CopyToClipboard>
             </Form.Group>
           </Form>
