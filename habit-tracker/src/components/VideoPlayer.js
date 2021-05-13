@@ -6,6 +6,8 @@ import { Form, Button, Card } from "react-bootstrap";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const socket = io("https://video-sockets.herokuapp.com/");
+// const socket = io("http://localhost:5001");
+
 const Video = () => {
   const [self, setSelf] = useState("");
   const [name, setName] = useState("");
@@ -28,39 +30,48 @@ const Video = () => {
   const idToCallRef = useRef();
   const nameRef = useRef();
 
+  // RUNS WHEN COMPONENT MOUNTS
   useEffect(() => {
+    // GET MEDIA STREAM FROM LOCAL COMPUTER
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         setStream(stream);
+        // POPULATE MY VIDEO
         myVideo.current.srcObject = stream;
-        console.log(myVideo.current.srcObject);
       })
       .catch((err) => console.log(err));
 
-    console.log("getting socket id!");
+    // GET SOCKET ID FROM SIGNALING SERVER
     socket.on("self", (id) => {
       setSelf(id);
-      console.log(id);
     });
 
+    // LISTEN FOR WHEN REMOTE PEER IS CALLING ME
     socket.on("callUser", ({ from, name, signal }) => {
       setReceivingCall(true);
       setCallerID(from);
       setCallerName(name);
       setCallerSignal(signal);
-      console.log(name + " IS CALLING YOU WITH ID: " + from);
     });
+
+    // hacky way to remove warning
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // CALL ANOTHER USER
   const callUser = (userToCall) => {
-    console.log("From: " + self + " Calling: " + userToCall);
+    // CREATE WEBRTC P2P CONNECTION
+    // THIS IS SELF
     const peer = new Peer({
       initiator: true,
       trickle: false,
       stream: stream,
     });
+
+    // FIRES RIGHT AWAY SINCE INITIATOR == TRUE
     peer.on("signal", (data) => {
+      // TELL SIGNALING SERVER WHO TO CALL
       socket.emit("callUser", {
         userToCall: userToCall,
         signalData: data,
@@ -68,35 +79,67 @@ const Video = () => {
         name: name,
       });
     });
-    peer.on("stream", (stream) => {
-      callerVideo.current.srcObject = stream;
-    });
+
+    // LISTEN FOR CALL ACCEPTED EVENT FROM SIGNALING SERVER
     socket.on("callAccepted", (signal) => {
       setCallAccepted(true);
+      // CALLED WHENEVER REMOTE PEER EMITS peer.on('signal') EVENT
+      // CONNECT TO REMOTE PEER
       peer.signal(signal);
     });
 
+    // GET STREAM FROM REMOTE PEER
+    peer.on("stream", (stream) => {
+      // SET CALLER VIDEO STREAM
+      callerVideo.current.srcObject = stream;
+    });
+
+    // ERROR HANDLING
+    peer.on("error", (err) => {
+      console.log("Error!", err);
+    });
+
+    // USED TO END P2P CONNECTION WHEN HANGING UP
     connectionRef.current = peer;
   };
 
+  // ANSWER REMOTE CALL
   const answerCall = () => {
     setCallAccepted(true);
+
+    // CREATE WEBRTC P2P CONNECTION
+    // THIS IS SELF
     const peer = new Peer({
       initiator: false,
       trickle: false,
       stream: stream,
     });
+
+    // FIRES WHEN REMOTE OFFER IS RECEIVED
     peer.on("signal", (data) => {
+      // SERVER WILL PASS MY DATA ONTO REMOTE PEER
       socket.emit("answerCall", { signal: data, to: callerID });
     });
+
+    // GET STREAM FROM REMOTE PEER
     peer.on("stream", (stream) => {
       callerVideo.current.srcObject = stream;
     });
 
+    // CALLED WHENEVER REMOTE PEER EMITS peer.on('signal') EVENT
+    // CONNECT TO REMOTE PEER
     peer.signal(callerSignal);
+
+    // ERROR HANDLING
+    peer.on("error", (err) => {
+      console.log("Error!", err);
+    });
+
+    // USED TO END P2P CONNECTION WHEN HANGING UP
     connectionRef.current = peer;
   };
 
+  // CLEAN UP AFTER CALL
   const leaveCall = () => {
     setCallEnded(true);
     connectionRef.current.destroy();
