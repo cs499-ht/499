@@ -55,15 +55,11 @@ const Video = () => {
       setCallerName(name);
       setCallerSignal(signal);
     });
-
-    // hacky way to remove warning
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // CALL ANOTHER USER
   const callUser = (userToCall) => {
-    // CREATE WEBRTC P2P CONNECTION
-    // THIS IS SELF
+    // CREATE WEBRTC P2P SELF
     const peer = new Peer({
       initiator: true,
       trickle: false,
@@ -85,14 +81,12 @@ const Video = () => {
     socket.current.on("callAccepted", ({ signal, name }) => {
       setCallAccepted(true);
       setCallerName(name);
-      // CALLED WHENEVER REMOTE PEER EMITS peer.on('signal') EVENT
       // CONNECT TO REMOTE PEER
       peer.signal(signal);
     });
 
     // GET STREAM FROM REMOTE PEER
     peer.on("stream", (stream) => {
-      // SET CALLER VIDEO STREAM
       callerVideo.current.srcObject = stream;
     });
 
