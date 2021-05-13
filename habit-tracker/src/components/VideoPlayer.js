@@ -5,9 +5,6 @@ import Peer from "simple-peer";
 import { Form, Button, Card } from "react-bootstrap";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-const socket = io("https://video-sockets.herokuapp.com/");
-// const socket = io("http://localhost:5001");
-
 const Video = () => {
   const [self, setSelf] = useState("");
   const [name, setName] = useState("");
@@ -29,9 +26,13 @@ const Video = () => {
   const connectionRef = useRef();
   const idToCallRef = useRef();
   const nameRef = useRef();
+  const socket = useRef();
 
   // RUNS WHEN COMPONENT MOUNTS
   useEffect(() => {
+    // NEW SOCKET CONNECTION
+    socket.current = io("https://video-sockets.herokuapp.com/");
+
     // GET MEDIA STREAM FROM LOCAL COMPUTER
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
@@ -43,12 +44,12 @@ const Video = () => {
       .catch((err) => console.log(err));
 
     // GET SOCKET ID FROM SIGNALING SERVER
-    socket.on("self", (id) => {
+    socket.current.on("self", (id) => {
       setSelf(id);
     });
 
     // LISTEN FOR WHEN REMOTE PEER IS CALLING ME
-    socket.on("callUser", ({ from, name, signal }) => {
+    socket.current.on("callUser", ({ from, name, signal }) => {
       setReceivingCall(true);
       setCallerID(from);
       setCallerName(name);
@@ -72,7 +73,7 @@ const Video = () => {
     // FIRES RIGHT AWAY SINCE INITIATOR == TRUE
     peer.on("signal", (data) => {
       // TELL SIGNALING SERVER WHO TO CALL
-      socket.emit("callUser", {
+      socket.current.emit("callUser", {
         userToCall: userToCall,
         signalData: data,
         from: self,
@@ -81,8 +82,9 @@ const Video = () => {
     });
 
     // LISTEN FOR CALL ACCEPTED EVENT FROM SIGNALING SERVER
-    socket.on("callAccepted", (signal) => {
+    socket.current.on("callAccepted", ({ signal, name }) => {
       setCallAccepted(true);
+      setCallerName(name);
       // CALLED WHENEVER REMOTE PEER EMITS peer.on('signal') EVENT
       // CONNECT TO REMOTE PEER
       peer.signal(signal);
@@ -118,7 +120,11 @@ const Video = () => {
     // FIRES WHEN REMOTE OFFER IS RECEIVED
     peer.on("signal", (data) => {
       // SERVER WILL PASS MY DATA ONTO REMOTE PEER
-      socket.emit("answerCall", { signal: data, to: callerID });
+      socket.current.emit("answerCall", {
+        signal: data,
+        to: callerID,
+        name: name,
+      });
     });
 
     // GET STREAM FROM REMOTE PEER
