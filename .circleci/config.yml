@@ -1,12 +1,13 @@
 version: 2.1
 jobs:
   deploy:
-    working_directory: ~/habit-tracker
+    working_directory: ~/project
     docker: 
       - image: circleci/node:10
     steps: 
       - checkout
       - run: ls
+      - run: cd habit-tracker
       #Download and cache dependencies
       - restore_cache:
             keys:
