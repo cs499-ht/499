@@ -4,7 +4,7 @@ import "firebase/firestore";
 
 // TODO USE .ENV VARIABLES INSTEAD OF HARDCODING
 const app = firebase.initializeApp({
-  apiKey: "AIzaSyALph0dwg84NTwu42majCLjEtaqMxtUpC4",
+  apiKey: "AIzaSyBrcuHyA8JFvyjpmWMW927glB_9ci-xEZs",
   authDomain: "habit-tracker-2864b.firebaseapp.com",
   projectId: "habit-tracker-2864b",
   storageBucket: "habit-tracker-2864b.appspot.com",
