@@ -62,7 +62,8 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
     "enzyme-to-json": "^3.6.1",
-    "lint": "^0.7.0"
+    "lint": "^0.7.0",
+    "react-test-renderer": "^17.0.2"
   },
   "jest": {
     "snapshotSerializers": [
