@@ -8,6 +8,7 @@ jobs:
       - checkout
       - run: ls
       - run: cd habit-tracker
+      - run: ls
       #Download and cache dependencies
       - restore_cache:
             keys:
