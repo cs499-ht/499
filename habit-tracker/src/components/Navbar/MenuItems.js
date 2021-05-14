@@ -10,6 +10,11 @@ export const MenuItems = [
     cName: "nav-links",
   },
   {
+    title: "Video",
+    path: "/Video",
+    cName: "nav-links",
+  },
+  {
     title: "Login",
     path: "/Login",
     cName: "nav-links",

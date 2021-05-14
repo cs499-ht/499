@@ -5,7 +5,6 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 
 const AddHabit = (handleClose) => {
-  const usernameRef = useRef();
   const descriptionRef = useRef();
   const totalCountRef = useRef();
   const completedRef = useRef();
