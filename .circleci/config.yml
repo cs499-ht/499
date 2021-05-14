@@ -1,11 +1,12 @@
 version: 2.1
 jobs:
   deploy:
-    working_directory: ~/project
     docker: 
       - image: circleci/node:10
+    working_directory: ~/repo/habit-tracker
     steps: 
-      - checkout
+      - checkout:
+          path: ~/repo
       - run: ls
       - run: cd habit-tracker
       - run: ls
