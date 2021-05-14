@@ -6,6 +6,7 @@ jobs:
       - image: circleci/node:10
     steps: 
       - checkout
+      - run: ls
       #Download and cache dependencies
       - restore_cache:
             keys:
