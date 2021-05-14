@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
 const fetchHabits = async () => {
-  const res = await fetch("http://localhost:5000/habits");
+  const res = await fetch("https://radiant-anchorage-47017.herokuapp.com/habits");
   const data = await res.json();
   return data;
 };
