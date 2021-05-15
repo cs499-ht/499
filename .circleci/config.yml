@@ -20,7 +20,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm build 
-      - run: npm netlify:deploy
+      - run: npm run netlify:deploy
 workflows:
   test_app:
     jobs:
