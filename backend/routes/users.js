@@ -2,7 +2,7 @@ const router = require("express").Router(); //needed because we're creating a ro
 let User = require("../models/user.model"); //mongoose model
 
 // Returns all users
-// http://localhost:5000/users/
+// https://radiant-anchorage-47017.herokuapp.com/users/
 router.route("/").get((req, res) => {
   User.find() //mongoose method that gets all users from MongoDB Atlas DB; returns a promise
     .then((users) => res.json(users))
@@ -10,7 +10,7 @@ router.route("/").get((req, res) => {
 });
 
 // Register user
-// http://localhost:5000/users/register
+// https://radiant-anchorage-47017.herokuapp.com/users/register
 router.route("/register").post((req, res) => {
   const { username, password, phoneNumber, email } = req.body;
 
@@ -31,7 +31,7 @@ router.route("/register").post((req, res) => {
 });
 
 // login
-// http://localhost:5000/users/login
+// https://radiant-anchorage-47017.herokuapp.com/users/login
 router.route("/login").post((req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -51,7 +51,7 @@ router.route("/login").post((req, res) => {
 });
 
 // delete user
-// http://localhost:5000/users/delete
+// https://radiant-anchorage-47017.herokuapp.com/users/delete
 router.route("/delete").delete((req, res) => {
   const username = req.body.username;
 

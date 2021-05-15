@@ -14,22 +14,22 @@ Use Insomnia or Postman to test backend API
 
 ![user schema](./readme_images/user_schema.png)
 
-Read All Users - GET http://localhost:5000/users/
+Read All Users - GET https://radiant-anchorage-47017.herokuapp.com/users/
 ![all users](./readme_images/all_users.png)
 
-Register User - POST http://localhost:5000/users/register
+Register User - POST https://radiant-anchorage-47017.herokuapp.com/users/register
 
 - remember to use JSON body
 
 ![register users](./readme_images/register_user.png)
 
-Login User - POST http://localhost:5000/users/Login
+Login User - POST https://radiant-anchorage-47017.herokuapp.com/users/Login
 
 - remember to use JSON body
 
 ![add users](./readme_images/login_user.png)
 
-Delete User - DELETE http://localhost:5000/users/register
+Delete User - DELETE https://radiant-anchorage-47017.herokuapp.com/users/register
 
 - remember to use JSON body
 
@@ -39,24 +39,24 @@ Delete User - DELETE http://localhost:5000/users/register
 
 ![habit schema](./readme_images/habit_schema.png)
 
-Read All Habits - GET http://localhost:5000/habits/
+Read All Habits - GET https://radiant-anchorage-47017.herokuapp.com/habits/
 
 ![all habits](./readme_images/all_habits.png)
 
-Add Habit - GET http://localhost:5000/habits/add
+Add Habit - GET https://radiant-anchorage-47017.herokuapp.com/habits/add
 
 ![add habit](./readme_images/add_habit.png)
 
-Read Single Habit - GET http://localhost:5000/habits/{id}
+Read Single Habit - GET https://radiant-anchorage-47017.herokuapp.com/habits/{id}
 
 ![find habit](./readme_images/find_habit.png)
 
-Update Single Habit - POST http://localhost:5000/habits/update/{id}
+Update Single Habit - POST https://radiant-anchorage-47017.herokuapp.com/habits/update/{id}
 
 - remember to use JSON body
 
 ![update habit](./readme_images/update_habit.png)
 
-Delete Single Habit - DELETE http://localhost:5000/habits/{id} (Find one using read all habits first)
+Delete Single Habit - DELETE https://radiant-anchorage-47017.herokuapp.com/habits/{id} (Find one using read all habits first)
 
 ![delete habit](./readme_images/delete_habit.png)

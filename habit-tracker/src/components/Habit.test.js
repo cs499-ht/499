@@ -1,4 +1,4 @@
-import { shallow } from "enzyme";
+import {shallow} from 'enzyme'
 import Habit from "./Habit";
 
 describe("Habit component testing", () => {

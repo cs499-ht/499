@@ -23,7 +23,7 @@ export const HabitProvider = ({ children }) => {
   // fetch habits
   // can't use async w/ useEffect, need to create async
   const fetchHabits = async () => {
-    const res = await fetch("http://localhost:5000/habits");
+    const res = await fetch("https://radiant-anchorage-47017.herokuapp.com/habits");
     const data = await res.json();
     return data;
   };
@@ -31,7 +31,7 @@ export const HabitProvider = ({ children }) => {
   // save habit
   const saveHabit = async (habit) => {
     console.log("saving habit", JSON.stringify(habit));
-    const res = await fetch("http://localhost:5000/habits/add", {
+    const res = await fetch("https://radiant-anchorage-47017.herokuapp.com/habits/add", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -43,14 +43,14 @@ export const HabitProvider = ({ children }) => {
   };
 
   const deleteHabit = async (id) => {
-    await fetch(`http://localhost:5000/habits/${id}`, { method: "DELETE" });
+    await fetch(`https://radiant-anchorage-47017.herokuapp.com/habits/${id}`, { method: "DELETE" });
 
     setHabits(habits.filter((habit) => habit._id !== id));
   };
 
   // fetch single habit - needed for toggle complete
   const fetchHabit = async (id) => {
-    const res = await fetch(`http://localhost:5000/habits/${id}`);
+    const res = await fetch(`https://radiant-anchorage-47017.herokuapp.com/habits/${id}`);
     const data = await res.json();
     return data;
   };
@@ -74,7 +74,7 @@ export const HabitProvider = ({ children }) => {
 
     // console.log("updated habit: ", updatedHabit);
 
-    const res = await fetch(`http://localhost:5000/habits/update/${id}`, {
+    const res = await fetch(`https://radiant-anchorage-47017.herokuapp.com/habits/update/${id}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

@@ -1,14 +1,14 @@
 const router = require("express").Router(); //needed because we're creating a route
 const Habit = require("../models/habit.model");
 
-//first route 'localhost:5000/habits/'
+//first route 'https://radiant-anchorage-47017.herokuapp.com/habits/'
 router.route("/").get((req, res) => {
   Habit.find() //mongoose method that gets all habits from MongoDB Atlas DB; returns a promise
     .then((habits) => res.json(habits))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-//second route 'localhost:5000/habits/add'
+//second route 'https://radiant-anchorage-47017.herokuapp.com/habits/add'
 router.route("/add").post((req, res) => {
   const username = req.body.username;
   const email = req.body.email;
